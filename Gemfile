@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
+gem 'bootstrap-sass', '~> 3.3.5'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # Use postgresql as the database for Active Record

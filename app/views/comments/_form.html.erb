@@ -23,6 +23,23 @@
     <%= f.label :user_id %><br>
     <%= f.number_field :user_id %>
   </div>
+  <div class="field">
+    <% if @comment.image? %>
+    <div class="thumbnail">
+      <%= image_tag @comment.image.url %>
+    </div>
+    <% end %><br>
+    <%= f.label :image %><br>
+    <%= f.file_field :image %>
+    <%= f.hidden_field :image_cache %>
+  </div>
+  <div class="field">
+    <% if @comment.persisted? && @comment.image? %>
+    <label>
+      <%= f.check_box :remove_image %>remove
+    </label>
+    <% end %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

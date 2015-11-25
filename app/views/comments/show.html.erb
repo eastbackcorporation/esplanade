@@ -15,5 +15,13 @@
   <%= @comment.user_id %>
 </p>
 
+<p>
+  <strong>Image:</strong>
+  <% if @comment.image? %>
+  <div class="thumbnail">
+    <%= image_tag @comment.image.url %>
+  </div>
+  <% end %>
+</p>
 <%= link_to 'Edit', edit_comment_path(@comment) %> |
 <%= link_to 'Back', comments_path %>

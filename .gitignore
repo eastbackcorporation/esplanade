@@ -11,3 +11,14 @@
 /log/*
 !/log/.keep
 /tmp
+
+# Upload image files.
+/public/uploads/comment/image/*
+!/public/uploads/comment/image/.keep
+/public/uploads/tmp/*
+!/public/uploads/tmp/.keep
+
+
+
+
+

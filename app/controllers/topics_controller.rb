@@ -13,6 +13,11 @@ class TopicsController < ApplicationController
   # GET /topics/1.json
   def show
     @comment = Comment.new
+    @comment.topic_id = @topic.id
+    if user_signed_in?
+      @comment.user_id = current_user.id
+      @user = current_user.email
+    end
   end
 
   # GET /topics/new

@@ -15,6 +15,24 @@
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
+  <div class="field">
+        <% if @category.image? %>
+        <div class="thumbnail">
+          <%= image_tag @category.image.url %>
+        </div>
+        <% end %><br>
+        <%= f.file_field :image %>
+        <%= f.hidden_field :image_cache %>
+      </div>
+        <div class="field">
+          <% if @category.persisted? && @category.image? %>
+        <label>
+          <%= f.check_box :remove_image %>remove
+        </label>
+        <% end %>
+      </div>
+</div>
+
   <div class="actions">
     <%= f.submit %>
   </div>

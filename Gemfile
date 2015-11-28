@@ -53,6 +53,14 @@ group :development, :test do
   gem 'pry-doc'
   gem 'pry-byebug'
   gem 'pry-stack_explorer'
+
+  #test environment
+  gem 'rspec-rails'
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'poltergeist'
+  gem 'turnip'
+  gem 'selenium-webdriver'
 end
 
 group :development do

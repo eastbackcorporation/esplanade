@@ -18,3 +18,18 @@ Capybara.configure do |config|
   config.ignore_hidden_elements = true
   config.default_max_wait_time = 30
 end
+
+RSpec.configure do |config|
+
+  config.before(:suite) do
+    DatabaseCleaner.strategy = :truncation
+  end
+
+  config.before(:each) do
+    DatabaseCleaner.start
+  end
+
+  config.after(:each) do
+    DatabaseCleaner.clean
+  end
+end

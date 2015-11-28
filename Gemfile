@@ -61,6 +61,7 @@ group :development, :test do
   gem 'poltergeist'
   gem 'turnip'
   gem 'selenium-webdriver'
+  gem 'database_cleaner'
 end
 
 group :development do

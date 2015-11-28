@@ -1,7 +1,14 @@
-# encoding: utf-8
+# coding: utf-8
+RSpec.configure do |config|
+  config.before(:each, type: :feature) do
+    User.create(email: "test@example.com",
+                password: "test1234",
+                password_confirmation: "test1234")
+  end
+end
 steps_for :login do
   step 'サイトにアクセスする' do
-    Capybara.app_host = "http://localhost:3333"
+    Capybara.app_host = "http://localhost:#{Capybara.server_port}"
   end
 
   step 'ログインページを表示する' do

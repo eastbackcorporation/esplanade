@@ -1,18 +1,23 @@
 <p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Title:</strong>
-  <%= @category.title %>
-</p>
+<div  class="container">
+  <table class="table table-striped">
+    <tbody>
+      <% @category.topics.each do |t| %>
+      <tr>
+        <td>
+        <%= link_to t do %>
+        <div>
+          <strong><%= t.title %></strong>
+        </div>
+        <div>
+          <label class="long-text"><%= t.value %></label>
+        </div>
+        <% end %>
+        </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
-<p>
-  <strong>Image:</strong>
-  <% if @category.image? %>
-  <div class="thumbnail">
-    <%= image_tag @category.image.url %>
-  </div>
-  <% end %>
-</p>
-
-<%= link_to 'Edit', edit_category_path(@category) %> |
-<%= link_to 'Back', categories_path %>

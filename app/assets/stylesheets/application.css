@@ -2,4 +2,19 @@
  *= require_self
  *= require lumen/loader
  *= require lumen/bootswatch
-*/
+ */
+
+.long-text {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  -webkit-text-overflow: ellipsis;
+  -o-text-overflow: ellipsis;
+}
+
+.table {
+  width: 100%;
+  table-layout: fixed;
+  word-wrap: break-word;
+}

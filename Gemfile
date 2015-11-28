@@ -13,6 +13,7 @@ gem 'twitter-bootswatch-rails'
 gem 'twitter-bootswatch-rails-helpers'
 gem 'execjs'
 gem 'less-rails'
+gem 'gretel'
 
 # Image Uploder
 gem 'carrierwave'

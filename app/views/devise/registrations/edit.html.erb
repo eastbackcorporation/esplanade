@@ -5,7 +5,8 @@
 
   <div><%= f.label :email %><br />
   <%= f.email_field :email %></div>
-
+<div><%= f.label :username %><br />
+  <%= f.text_field :username %></div>
   <%- if devise_mapping.confirmable? && resource.pending_reconfirmation? -%>
     <p>
       <%= t('.currently_waiting_confirmation_for_email', :email => resource.unconfirmed_email, :default => "Currently waiting confirmation for: %{email}") %>

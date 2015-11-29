@@ -16,7 +16,7 @@ class TopicsController < ApplicationController
     @comment.topic_id = @topic.id
     if user_signed_in?
       @comment.user_id = current_user.id
-      @user = current_user.email
+      @username = current_user.username
     end
   end
 

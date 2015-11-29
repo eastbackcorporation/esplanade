@@ -9,7 +9,7 @@
      <h3 class="panel-title">
        <strong><%= @topic.title %></strong><br />
        <small>
-         投稿者：<%= @topic.user.email %>
+         投稿者：<%= @topic.user.username %>
          &nbsp;&nbsp;
          <%= @topic.created_at.to_s %>
        </small>
@@ -25,7 +25,7 @@
             <div class="panel-heading">
               <h3 class="panel-title">
                 <small>
-                  投稿者：<%= comment.user.email %>
+                  投稿者：<%= comment.user.username %>
                   &nbsp;&nbsp;
                   <%= comment.created_at.to_s %>
                 </small>

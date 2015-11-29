@@ -10,7 +10,7 @@
   <header>
     <nav>
       <% if user_signed_in? %>
-         <strong><%= current_user.email %></strong>
+         <strong><%= current_user.username %></strong>
                  <%= link_to 'プロフィール変更', edit_user_registration_path %>
                  <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
              <% else %>

@@ -13,14 +13,14 @@ crumb :category do |category|
   parent :root
 end
 
-crumb :topics do
+crumb :topics do |selected_category|
   link "トピック選択", topics_path
-  parent :category
+  parent :category, selected_category
 end
 
 crumb :topic do |topic|
   link topic.title, topic
-  parent :category
+  parent :category, topic.category
 end
 
 # crumb :projects do

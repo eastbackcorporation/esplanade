@@ -5,19 +5,23 @@
 <div class="container">
   <div class="row">
     <% @categories.each do |category| %>
-    <div class="col-xs-4">
-      <div class="panel panel-default">
-        <div class="panel-body">
-          <% if category.image? %>
-          <%= image_tag category.image.url, class: "img-responsive", width: "100px", height: "100px"%>
-          <% else %>
-          <%= image_tag "/category-default.png", class: "img-responsive", width: "100px", height: "100px"%>
+      <div class="col-xs-4">
+        <div class="panel panel-default">
+          <%= link_to category do %>
+            <div class="panel-body"  style="text-align: center">
+              <% if category.image? %>
+                <%= image_tag category.image.url, class: "img-responsive center-block", width: "100px", height: "100px"%>
+              <% else %>
+                <%= image_tag "/category-default.png", class: "img-responsive center-block", width: "100px", height: "100px"%>
+              <% end %>
+              <%= category.title %>
+            </div><!-- end panel-body -->
           <% end %>
-          <%= category.title %>
-        </div>
-      </div>
-    </div>
-<% end %>
+        </div><!-- end panel -->
+      </div><!-- end col -->
+    <% end %>
+  </div><!-- end row -->
+</div><!-- end container -->
 
 <table>
   <thead>

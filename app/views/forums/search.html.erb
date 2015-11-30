@@ -1,0 +1,40 @@
+<strong>トピック</strong>
+<div  class="container">
+  <table class="table table-striped">
+    <tbody>
+      <% @topics.each do |t| %>
+      <tr>
+        <td>
+        <%= link_to t do %>
+        <div>
+          <strong><%= t.title %></strong>
+        </div>
+        <div>
+          <label class="long-text"><%= t.value %></label>
+        </div>
+        <% end %>
+        </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+<strong>コメント</strong>
+<div  class="container">
+  <table class="table table-striped">
+    <tbody>
+      <% @comments.each do |c| %>
+      <tr>
+        <td>
+        <%= link_to c.topic do %>
+        <div>
+          <label class="long-text"><%= c.value %></label>
+        </div>
+        <% end %>
+        </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+

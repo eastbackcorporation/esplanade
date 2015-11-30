@@ -27,6 +27,12 @@
     <p class="alert"><%= alert %></p>
   <% end %>
 
+<%= form_tag(controller: "forums", action: "search") do %>
+<%= text_field :word, value = nil, options = {} %>
+
+<%= submit_tag "検索" %>
+<% end %>
+
 <%= yield %>
 
 </body>

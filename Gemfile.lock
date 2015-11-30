@@ -84,7 +84,7 @@ GEM
       thread_safe (~> 0.1)
       warden (~> 1.2.3)
     devise-i18n (0.12.1)
-    devise-i18n-views (0.3.6)
+    devise-i18n-views (0.3.7)
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.6.0)
@@ -130,6 +130,8 @@ GEM
       cliver (~> 0.3.1)
       multi_json (~> 1.0)
       websocket-driver (>= 0.2.0)
+    polyamorous (1.2.0)
+      activerecord (>= 3.0)
     pry (0.10.3)
       coderay (~> 1.1.0)
       method_source (~> 0.8.1)
@@ -173,6 +175,12 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
+    ransack (1.7.0)
+      actionpack (>= 3.0)
+      activerecord (>= 3.0)
+      activesupport (>= 3.0)
+      i18n
+      polyamorous (~> 1.2)
     rdoc (4.2.0)
     ref (2.0.0)
     responders (2.1.0)
@@ -284,6 +292,7 @@ DEPENDENCIES
   pry-rails
   pry-stack_explorer
   rails (= 4.2.5)
+  ransack
   rspec-rails
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)

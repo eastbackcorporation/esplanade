@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>SimpleForum</title>
+  <title>Esplanade</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -27,7 +27,7 @@
     <p class="alert"><%= alert %></p>
   <% end %>
 
-<%= form_tag(controller: "forums", action: "search") do %>
+<%= form_tag(controller: "/forums", action: "search") do %>
 <%= text_field :word, value = nil, options = {} %>
 
 <%= submit_tag "検索" %>

@@ -12,21 +12,41 @@
   <% end %>
   <%= f.hidden_field :category_id %>
   <%= f.hidden_field :user_id %>
-  <div class="field">
-    <%= f.label :title %><br>
-    <%= f.text_field :title %>
-  </div>
-
-  <div class="field">
-    <%= f.label :value %><br>
-    <%= f.text_area :value %>
-  </div>
-  <% if current_user.try(:admin?) %>
-    <% Topic.statuses.each_key do |s|%>
-      <%= f.radio_button :status, s %><label><%= s %></label>
-    <% end %>
-  <% end %>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <form class="form-horizontal">
+    <fieldset>
+      <div class="form-group">
+        <label class="col-lg-2 control-label">タイトル</label>
+        <div class="col-lg-10">
+            <%= f.text_field :title, class: "form-control",  placeholder: "・・・について" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-lg-2 control-label">詳細</label>
+        <div class="col-lg-10">
+            <%= f.text_area :value, class: "form-control", rows: "3" %>
+        </div>
+      </div>
+      <% if current_user.try(:admin?) %>
+        <div class="form-group">
+          <label class="col-lg-2 control-label">ステータス</label>
+          <div class="col-lg-10">
+            <% Topic.statuses.each_key do |s|%>
+            <div class="radio">
+              <label>
+                <input type="radio" value="option1" checked="">
+                <% check = @topic.status == s ? "checked" : ""%>
+                <%= f.radio_button :status, s, checked: check %><%= s %>
+              </label>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-2">
+          <%= f.submit '投稿', class: "btn btn-primary" %>
+        </div>
+      </div>
+    </fieldset>
+  </form>
 <% end %>

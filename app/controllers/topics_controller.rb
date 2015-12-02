@@ -1,6 +1,6 @@
 class TopicsController < ApplicationController
   before_action :sign_in_required, only: [:new, :create]
-  before_action :admin_required, only: [:edit, :update, :destory]
+  before_action :admin_required, only: [:index, :edit, :update, :destory]
   before_action :set_topic, only: [:show, :edit, :update, :destroy]
 
   # GET /topics

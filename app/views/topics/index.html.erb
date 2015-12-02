@@ -1,26 +1,25 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Listing Topics</h1>
-
-<table>
+<table class="table table-stripped">
   <thead>
     <tr>
-      <th>Title</th>
-      <th>Category</th>
-      <th>User</th>
-      <th colspan="3"></th>
+      <th>タイトル</th>
+      <th>詳細</th>
+      <th>カテゴリー</th>
+      <th>作成者</th>
+      <th>ステータス<th>
+      <th colspan="2"></th>
     </tr>
   </thead>
 
   <tbody>
     <% @topics.each do |topic| %>
       <tr>
-        <td><%= topic.title %></td>
-        <td><%= topic.category_id %></td>
-        <td><%= topic.user_id %></td>
-        <td><%= link_to 'Show', topic %></td>
-        <td><%= link_to 'Edit', edit_topic_path(topic) %></td>
-        <td><%= link_to 'Destroy', topic, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td class="long-text"><%= link_to topic.title, topic %></td>
+        <td class="long-text"><%= topic.value %></td>
+        <td class="long-text"><%= topic.category.title %></td>
+        <td class="long-text"><%= topic.user.username %></td>
+        <td class="long-text"><%= topic.status%></td>
+        <td><%= link_to '変更', edit_topic_path(topic) %></td>
+        <td><%= link_to '削除', topic, method: :delete, data: { confirm: '一般ユーザが閲覧できなくなります。よろしいですか？' } %></td>
       </tr>
     <% end %>
   </tbody>

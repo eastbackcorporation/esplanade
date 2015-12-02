@@ -1,7 +1,9 @@
+# coding: utf-8
 class TopicsController < ApplicationController
   before_action :sign_in_required, only: [:new, :create]
   before_action :admin_required, only: [:index, :edit, :update, :destory]
   before_action :set_topic, only: [:show, :edit, :update, :destroy]
+  before_action :not_view_deleted_topic, only: [:show]
 
   # GET /topics
   # GET /topics.json
@@ -62,10 +64,11 @@ class TopicsController < ApplicationController
   # DELETE /topics/1
   # DELETE /topics/1.json
   def destroy
-    @topic.destroy
+    @topic.status = Topic.statuses[:deleted]
     respond_to do |format|
-      format.html { redirect_to topics_url, notice: 'Topic was successfully destroyed.' }
-      format.json { head :no_content }
+      if @topic.save
+        format.html { redirect_to topics_url, notice: "#{@topic.title}は一般ユーザが閲覧できなくなりました" }
+      end
     end
   end
 
@@ -78,5 +81,13 @@ class TopicsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def topic_params
       params.require(:topic).permit(:title, :category_id, :user_id)
+    end
+
+    def not_view_deleted_topic
+      unless current_user.try(:admin?)
+        if @topic.deleted?
+          redirect_to root_path
+        end
+      end
     end
 end

@@ -23,6 +23,7 @@
   </div><!-- end row -->
 </div><!-- end container -->
 
+<% if current_user.try(:admin?)%>
 <table>
   <thead>
     <tr>
@@ -45,4 +46,5 @@
 
 <br>
 
-<%= link_to 'New Category', new_category_path %>
+<%= link_to '新規作成', new_category_path %>
+<% end %>

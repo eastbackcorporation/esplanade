@@ -1,12 +1,12 @@
 # coding: utf-8
-RSpec.configure do |config|
-  config.before(:each, type: :feature) do
+steps_for :login do
+  step 'ログインデータがある' do
     User.create(email: "test@example.com",
+                username: "testuser",
                 password: "test1234",
                 password_confirmation: "test1234")
   end
-end
-steps_for :login do
+
   step 'サイトにアクセスする' do
     Capybara.app_host = "http://localhost:#{Capybara.server_port}"
   end
@@ -19,9 +19,9 @@ steps_for :login do
     expect(page).to have_content('ログイン')
   end
 
-  step 'id と password を入力する' do
+  step 'idとpasswordを入力する' do
     visit '/users/sign_in'
-    fill_in 'user[email]', :with => 'test@example.com'
+    fill_in 'user[login]', :with => 'test@example.com'
     fill_in 'user[password]', :with => 'test1234'
   end
 
@@ -33,14 +33,21 @@ steps_for :login do
     expect(page).to have_content(user)
   end
 
-  step "画面にユーザ名test@example.comが表示されること" do
-    step "view 'test@example' on screen"
+  step "画面にユーザ名が表示されること" do
+    step "view 'testuser' on screen"
   end
 end
 
 steps_for :fail_login do
+  step 'ログインデータがある' do
+    User.create(email: "test@example.com",
+                username: "testuser",
+                password: "test1234",
+                password_confirmation: "test1234")
+  end
+
   step 'サイトにアクセスする' do
-    Capybara.app_host = "http://localhost:3333"
+    Capybara.app_host = "http://localhost:#{Capybara.server_port}"
   end
 
   step 'ログインページを表示する' do
@@ -51,9 +58,9 @@ steps_for :fail_login do
     expect(page).to have_content('ログイン')
   end
 
-  step 'id と 間違いのpassword を入力する' do
+  step 'idと間違いのpasswordを入力する' do
     visit '/users/sign_in'
-    fill_in 'user[email]', :with => 'test@example.com'
+    fill_in 'user[login]', :with => 'test@example.com'
     fill_in 'user[password]', :with => 'test123456789'
   end
 
@@ -65,7 +72,7 @@ steps_for :fail_login do
     expect(page).to_not have_content(user)
   end
 
-  step "画面にユーザ名test@example.comが表示されていないこと" do
-    step "not view 'test@example' on screen"
+  step "画面にユーザ名が表示されていないこと" do
+    step "not view 'testuser' on screen"
   end
 end

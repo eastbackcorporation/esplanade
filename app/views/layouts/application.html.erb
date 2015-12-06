@@ -9,15 +9,32 @@
 <body>
   <header>
     <nav>
-      <% if user_signed_in? %>
-         <strong><%= current_user.username %></strong>
-                 <%= link_to 'プロフィール変更', edit_user_registration_path %>
-                 <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-             <% else %>
-                 <%= link_to 'サインアップ', new_user_registration_path %>
-                 <%= link_to 'ログイン', new_user_session_path %>
-             <% end %>
-             <%= breadcrumbs separator: " &rsaquo; " %>
+    <div class="container">
+      <div class="row">
+        <div class="pull-right">
+          <% if user_signed_in? %>
+            <strong><%= link_to current_user.username, edit_user_registration_path %></strong>
+            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+          <% else %>
+            <%= link_to 'サインアップ', new_user_registration_path %>
+            <%= link_to 'ログイン', new_user_session_path %>
+          <% end %>
+        </div>
+      </div>
+      <div class="row">
+        <div class="pull-right">
+          <%= form_tag(controller: "/forums", action: "search",class: "form-inline") do %>
+          <div class="form-group">
+            <%= text_field :word, value = nil, options = {} %>
+            <%= submit_tag "検索" %>
+          </div>
+          <% end %>
+        </div>
+        <div class="pull-left">
+          <%= breadcrumbs separator: " &rsaquo; " %>
+        </div>
+      </div>
+    </div><!-- container -->
     </nav>
   </header>
   <% if notice %>
@@ -26,13 +43,6 @@
   <% if alert %>
     <p class="alert"><%= alert %></p>
   <% end %>
-
-<%= form_tag(controller: "/forums", action: "search") do %>
-<%= text_field :word, value = nil, options = {} %>
-
-<%= submit_tag "検索" %>
-<% end %>
-
 <%= yield %>
 
 </body>

@@ -1,8 +1,5 @@
 <% breadcrumb :topic, @topic %>
-
-<p>
-  <strong><%= @topic.category.title %></strong>
-</p>
+<div class="container">
  <div class="panel panel-primary">
    <div class="panel-heading">
      <h3 class="panel-title">
@@ -35,5 +32,9 @@
             </div>
           </div>
 <% end %>
-<%= render template: "comments/new" %>
-<%= link_to 'Back', topics_path %>
+<% if user_signed_in? %>
+  <%= render template: "comments/new" %>
+<% end %>
+
+<%= link_to "戻る", category_path(@topic.category) %>
+</div>

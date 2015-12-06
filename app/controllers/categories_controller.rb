@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :admin_required, only: [:new,:create,:edit, :update, :destory]
+  before_action :admin_required, only: [:index,:new,:create,:edit, :update, :destory]
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   # GET /categories

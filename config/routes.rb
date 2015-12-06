@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root 'forums#index'
   get 'forums/index'
   get 'forums/admin'
+  get 'forums/home'
   post 'forums/search'
 
   resources :users, :only => [:index, :show]

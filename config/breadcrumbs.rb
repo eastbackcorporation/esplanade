@@ -1,6 +1,6 @@
 # coding: utf-8
 crumb :root do
-  link "Home", root_path
+  link "ホーム", forums_home_path
 end
 
 crumb :categories do

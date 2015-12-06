@@ -1,6 +1,9 @@
 class ForumsController < ApplicationController
   def index
   end
+  def home
+    @categories = Category.all
+  end
   def search
     #@categories = Category.search(title_cont: params["word"][0]).result
     @topics = Topic.search(title_or_value_cont: params["word"][0]).result

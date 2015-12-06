@@ -1,29 +1,3 @@
-<p id="notice"><%= notice %></p>
-<% breadcrumb :categories %>
-<h1>Listing Categories</h1>
-
-<div class="container">
-  <div class="row">
-    <% @categories.each do |category| %>
-      <div class="col-xs-4">
-        <div class="panel panel-default">
-          <%= link_to category do %>
-            <div class="panel-body"  style="text-align: center">
-              <% if category.image? %>
-                <%= image_tag category.image.url, class: "img-responsive center-block", width: "100px", height: "100px"%>
-              <% else %>
-                <%= image_tag "/category-default.png", class: "img-responsive center-block", width: "100px", height: "100px"%>
-              <% end %>
-              <%= category.title %>
-            </div><!-- end panel-body -->
-          <% end %>
-        </div><!-- end panel -->
-      </div><!-- end col -->
-    <% end %>
-  </div><!-- end row -->
-</div><!-- end container -->
-
-<% if current_user.try(:admin?)%>
 <table>
   <thead>
     <tr>
@@ -43,8 +17,7 @@
     <% end %>
   </tbody>
 </table>
-
 <br>
 
 <%= link_to '新規作成', new_category_path %>
-<% end %>
+

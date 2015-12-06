@@ -1,3 +1,4 @@
+# coding: utf-8
 class CommentsController < ApplicationController
   before_action :sign_in_required, only: [:new, :create]
   before_action :admin_required, only: [:edit, :update, :destory]
@@ -27,10 +28,10 @@ class CommentsController < ApplicationController
   # POST /comments.json
   def create
     @comment = Comment.new(comment_params)
-
+    @comment.user_id = current_user.id
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        format.html { redirect_to @comment.topic, notice: "コメントを作成しました" }
         format.json { render :show, status: :created, location: @comment }
       else
         format.html { render :new }
@@ -71,6 +72,6 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:value, :topic_id, :user_id, :image, :image_cache, :remove_image)
+      params.require(:comment).permit(:value, :topic_id, :image, :image_cache, :remove_image)
     end
 end

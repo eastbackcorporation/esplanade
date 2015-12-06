@@ -17,6 +17,7 @@ gem 'gretel'
 
 # Image Uploder
 gem 'carrierwave'
+gem 'mini_magick'
 
 # Search
 gem 'ransack'

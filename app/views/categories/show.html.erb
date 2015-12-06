@@ -20,7 +20,7 @@
       <% end %>
     </tbody>
   </table>
-  <%= link_to "新規作成", new_topic_path %>
+  <%= link_to "新規作成", new_topic_path(category_id: @category.id) %>
 </div>
 
 

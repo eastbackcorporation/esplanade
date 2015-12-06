@@ -25,6 +25,7 @@ class TopicsController < ApplicationController
   # GET /topics/new
   def new
     @topic = Topic.new
+    @topic.category_id = params[:category_id]
   end
 
   # GET /topics/1/edit
@@ -35,6 +36,7 @@ class TopicsController < ApplicationController
   # POST /topics.json
   def create
     @topic = Topic.new(topic_params)
+    @topic.user_id = current_user.id
     respond_to do |format|
       if @topic.save
         format.html { redirect_to @topic, notice: 'Topic was successfully created.' }
@@ -79,7 +81,7 @@ class TopicsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def topic_params
-      params.require(:topic).permit(:title, :category_id, :user_id, :status)
+      params.require(:topic).permit(:title, :value, :category_id, :status)
     end
 
     def not_view_deleted_topic

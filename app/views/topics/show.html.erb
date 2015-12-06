@@ -28,6 +28,11 @@
               </h3>
             </div>
             <div class="panel-body">
+              <% if comment.image.url.present? %>
+                <%= link_to comment.image.url do %>
+                  <%= image_tag comment.image.thumb.url, class: "img-responsive center-block"%>
+                <% end %>
+              <% end %>
               <%= comment.value %>
             </div>
           </div>

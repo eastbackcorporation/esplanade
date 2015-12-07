@@ -1,6 +1,6 @@
-<h1>名前: (<%= @user.username %>)</h1>
-<h1>メール: (<%= @user.email %>)</h1>
-<h1>トピック履歴</h1>
+名前: <%= link_to @user.username, edit_user_path(@user) %><br>
+メール: <%= @user.email %><br>
+<h3>トピック履歴</h3>
 <table class="table table-striped">
   <thead>
     <tr>
@@ -23,7 +23,7 @@
   </tbody>
 </table>
 
-<h1>コメント履歴</h1>
+<h3>コメント履歴</h3>
 <table class="table table-striped">
   <thead>
     <tr>

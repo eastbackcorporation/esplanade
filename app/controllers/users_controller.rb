@@ -22,6 +22,7 @@ class UsersController < ApplicationController
     @user.email = user_params[:email]
     @user.username = user_params[:username]
     @user.status = user_params[:status]
+    @user.admin = user_params[:admin]
     respond_to do |format|
       if @user.save
         format.html { redirect_to @user, notice: 'ユーザ情報を変更しました。' }
@@ -38,6 +39,6 @@ class UsersController < ApplicationController
     end
 
     def user_params
-      params.require(:user).permit(:email, :username, :password, :status)
+      params.require(:user).permit(:email, :username, :password, :status, :admin)
     end
 end

@@ -1,2 +1,57 @@
-<h1>Users#show</h1>
 <h1>名前: (<%= @user.username %>)</h1>
+<h1>メール: (<%= @user.email %>)</h1>
+<h1>トピック履歴</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>トピック</th>
+      <th>詳細</th>
+      <th>作成日</th>
+      <th>関連カテゴリ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @topics.each do |t|%>
+    <tr>
+      <td class="long-text"><%= link_to t.title, t %></td>
+      <td class="long-text"><%= t.value %></td>
+      <td class="long-test"><%= t.created_at %></td>
+      <td class="long-test"><%= link_to t.category.title, t.category %></td>
+      <td><%= link_to '編集', edit_topic_path(t) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h1>コメント履歴</h1>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>コメント</th>
+      <th>画像</th>
+      <th>作成日</th>
+      <th>関連トピック</th>
+      <th>関連カテゴリ</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @comments.each do |c|%>
+    <tr>
+      <td class="long-text"><%= c.value %></td>
+      <td>
+        <% if c.image.url.present? %>
+          <%= link_to c.image.url do %>
+            <%= image_tag c.image.thumb.url %>
+          <% end %>
+        <% else %>
+        なし
+        <% end %>
+      </td>
+      <td class="long-test"><%= c.created_at %></td>
+      <td class="long-test"><%= link_to c.topic.title, c.topic %></td>
+      <td class="long-test"><%= link_to c.topic.category.title, c.topic.category %></td>
+      <td><%= link_to '編集', edit_comment_path(c) %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -32,7 +32,7 @@ protected
 private
   def sign_in_required
     status = current_user.try(:status)
-    if status = User.statuses[:locked] or status = User.statuses[:deleted]
+    if status == User.statuses[:locked] or status == User.statuses[:deleted]
       redirect_to root_path, notice: "アカウントがロックもしくは削除されています。管理者に問い合わせてください。"
     else
       redirect_to new_user_session_url unless user_signed_in?

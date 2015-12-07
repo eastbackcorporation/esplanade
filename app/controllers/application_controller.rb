@@ -1,3 +1,4 @@
+# coding: utf-8
 class ApplicationController < ActionController::Base
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
@@ -30,7 +31,12 @@ protected
   end
 private
   def sign_in_required
-    redirect_to new_user_session_url unless user_signed_in?
+    status = current_user.try(:status)
+    if status = User.statuses[:locked] or status = User.statuses[:deleted]
+      redirect_to root_path, notice: "アカウントがロックもしくは削除されています。管理者に問い合わせてください。"
+    else
+      redirect_to new_user_session_url unless user_signed_in?
+    end
   end
 
   def admin_required

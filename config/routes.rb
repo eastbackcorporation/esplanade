@@ -2,7 +2,8 @@ Rails.application.routes.draw do
   resources :comments
   resources :topics
   resources :categories
-  devise_for :users
+  devise_for :users, controllers: { sessions: "devise_ex/sessions" }
+
   root 'forums#index'
   get 'forums/index'
   get 'forums/admin'

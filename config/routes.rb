@@ -9,7 +9,9 @@ Rails.application.routes.draw do
   get 'forums/home'
   post 'forums/search'
 
-  resources :users, :only => [:index, :show]
+  resources :users, :only => [:index, :show, :edit]
+  post 'users/:id' => 'users#update'
+  patch 'users/:id' => 'users#update'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

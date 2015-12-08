@@ -1,0 +1,51 @@
+<%= form_tag(controller: "/forums", action: "search") do %>
+<div class="modal fade search-modal" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="gridSystemModalLabel">詳細項目</h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-horizontal">
+          <div class="form-group">
+            <div class="col-lg-10">
+            <%= text_field :word, value = nil, options = {placeholder: "word", class: "form-control"} %>
+            </div>
+          </div>
+          <div class="form-group">
+            <div class="col-lg-10">
+              <%= select :between,:datetime,[['期間指定なし','none'],['1時間以内','1hour'], ['24時間以内','24hours'],['1週間以内','1week'],['1ヶ月以内','1month'],['1年以内','1year'],['期間を指定','appoint']], {},html_options={onchange: "if( $('#between_datetime').val() == 'appoint') {$('#date').show();}else{$('#date').hide();}", class: "form-control"} %>
+            </div>
+            <div id="date" style="display: none;">
+              <div class="col-xs-12 col-sm-3">
+                <%= text_field :created_at_gteq, value = nil, options ={placeholder: "start date", class: 'datepicker form-control'} %>
+              </div>
+              <div class="col-xs-1 hidden-xs">
+                <strong>〜</strong>
+              </div>
+              <div class="col-xs-12 col-sm-3">
+                <%= text_field :created_at_lteq, value = nil, options ={placeholder: "end date", class: 'datepicker form-control'} %>
+                </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <strong>検索範囲</strong>
+
+            <%= check_box_tag "topic", true, checked = true %><label>トピック</label>
+            <%= check_box_tag "comment", true, checked = true %><label>コメント</label>
+
+    <% if current_user.try(:admin?)%>
+      <%= check_box_tag "user", true, checked = true %><label>ユーザ</label>
+    <% end %>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">キャンセル</button>
+        <%= submit_tag "検索", class: "btn btn-primary" %>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<% end %>

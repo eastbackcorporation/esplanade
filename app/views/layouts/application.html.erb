@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -24,12 +25,16 @@
       </div>
       <div class="row">
         <div class="pull-right">
-          <%= form_tag(controller: "/forums", action: "search",class: "form-inline") do %>
           <div class="form-group">
+            <%= form_tag({controller: "/forums", action: "search"},class: "form-inline") do %>
             <%= text_field :word, value = nil, options = {} %>
-            <%= submit_tag "検索" %>
-          </div>
+            <%= submit_tag "検索", class: "btn btn-primary" %>
+            <!-- 詳細 -->
+            <button type="button" class="btn btn-default" data-toggle="modal" data-target=".search-modal">詳細</button>
           <% end %>
+          <%= render "layouts/search" %>
+          <!--詳細end -->
+          </div>
         </div>
         <div class="pull-left">
           <%= breadcrumbs separator: " &rsaquo; " %>

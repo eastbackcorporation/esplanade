@@ -12,9 +12,16 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require lumen/loader
 //= require lumen/bootswatch
-//= require jquery_ujs
 //= require turbolinks
 
-
+//ready =(function(){
+//    $('#datepicker').datepicker({ dateFormat: 'yy/mm/dd' })});
+$(function() {
+    $.datepicker.setDefaults( $.datepicker.regional[ "ja" ] );
+    $(".datepicker").datepicker();
+});
+//$(document).ready(ready)
+//$(document).on('page:load', ready)

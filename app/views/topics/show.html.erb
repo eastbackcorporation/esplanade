@@ -12,7 +12,7 @@
      </h3>
    </div>
    <div class="panel-body">
-     <%= @topic.value %>
+     <%= simple_format(h(@topic.value)) %>
    </div>
  </div>
 
@@ -21,7 +21,7 @@
             <div class="panel-heading">
               <h3 class="panel-title">
                 <small>
-                  投稿者：<%= comment.user.username %>
+                  投稿者：<%= h(comment.user.username) %>
                   &nbsp;&nbsp;
                   <%= comment.created_at.to_s %>
                 </small>
@@ -33,7 +33,7 @@
                   <%= image_tag comment.image.thumb.url, class: "img-responsive center-block"%>
                 <% end %>
               <% end %>
-              <%= comment.value %>
+              <%= simple_format(h(comment.value)) %>
             </div>
           </div>
 <% end %>

@@ -41,5 +41,5 @@
   <%= render template: "comments/new" %>
 <% end %>
 
-<%= link_to "戻る", category_path(@topic.category) %>
+<input type="button" class="btn btn-default" value="戻る" onclick="history.back()">
 </div>

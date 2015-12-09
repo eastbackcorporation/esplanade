@@ -17,3 +17,36 @@
     <% end %>
   </div>
 </div><!-- end container -->
+
+<div class="container">
+  <h3>新着情報</h3>
+  <div class="col-sm-4">
+    <div class="text-center"><strong>新規トピック</strong></div>
+    <div style="height:200px;overflow:scroll;">
+      <table class="table table-striped">
+        <tbody>
+          <% @created_topics.each do |ct| %>
+            <tr>
+              <td><%= ct.created_at.to_s(:date) %></td>
+              <td><%= link_to ct.title, topic_path(ct) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div><!-- col -->
+  <div class="col-sm-4">
+    <div class="text-center"><strong>新規コメントあり</strong></div>
+    <div style="height:200px;overflow:scroll;">
+    <table class="table table-striped">
+      <tbody>
+        <% @wrote_topics.each do |wt| %>
+          <tr>
+            <td><%= wt.created_at.to_s(:date) %></td>
+            <td><%= link_to wt.title, topic_path(wt) %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div><!-- col -->
+</div><!-- container -->

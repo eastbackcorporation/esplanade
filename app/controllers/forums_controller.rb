@@ -1,8 +1,21 @@
 class ForumsController < ApplicationController
   def index
+    redirect_to "/forums/home"
   end
   def home
     @categories = Category.all
+
+    late = Time.now - 3.day
+    @created_topics = Topic.search(created_at_gteq: late)
+                      .result
+                      .order('created_at desc')
+
+    @wrote_topics = Comment.joins(:topic)
+                    .select("topics.*")
+                    .search(created_at_gteq: late)
+                    .result
+                    .order('created_at desc')
+                    .uniq
   end
   def search
     #@categories = Category.search(title_cont: params["word"][0]).result

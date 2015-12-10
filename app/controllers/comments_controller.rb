@@ -7,7 +7,9 @@ class CommentsController < ApplicationController
   # GET /comments
   # GET /comments.json
   def index
-    @comments = Comment.all
+    @column = params[:column].nil? ? :title : params[:column]
+    @order = params[:order] == "asc" ? 'desc': 'asc'
+    @comments = Comment.joins(:topic,:user).all.order("#{@column} #{@order}").page params[:page]
   end
 
   # GET /comments/1

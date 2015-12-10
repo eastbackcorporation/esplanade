@@ -1,40 +1,82 @@
-<strong>トピック</strong>
-<div  class="container">
-  <table class="table table-striped">
-    <tbody>
-      <% @topics.each do |t| %>
-      <tr>
-        <td>
-        <%= link_to t do %>
-        <div>
-          <strong><%= t.title %></strong>
-        </div>
-        <div>
-          <label class="long-text"><%= t.value %></label>
-        </div>
-        <% end %>
-        </td>
+<div class="container">
+  <% if @view_topics %>
+  <strong>トピック</strong>
+  <div  class="container">
+    <% if @topics.blank? %>
+      <strong>該当なし</strong>
+    <% end %>
+    <table class="table table-striped">
+      <tbody>
+        <% @topics.each do |t| %>
+        <tr>
+          <td>
+            <%= link_to t do %>
+            <div>
+              <strong><%= t.title %></strong>
+            </div>
+            <div>
+              <label class="long-text"><%= t.value %></label>
+            </div>
+            <% end %>
+          </td>
         </tr>
-      <% end %>
-    </tbody>
-  </table>
-</div>
-<strong>コメント</strong>
-<div  class="container">
-  <table class="table table-striped">
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <% end %>
+  <% if @view_comments %>
+  <strong>コメント</strong>
+  <div  class="container">
+    <% if @comments.blank? %>
+      <strong>該当なし</strong>
+    <% end %>
+    <table class="table table-striped">
     <tbody>
       <% @comments.each do |c| %>
       <tr>
         <td>
-        <%= link_to c.topic do %>
-        <div>
-          <label class="long-text"><%= c.value %></label>
-        </div>
-        <% end %>
+          <%= link_to c.topic do %>
+          <div>
+            <label class="long-text"><%= c.value %></label>
+          </div>
+          <% end %>
         </td>
-        </tr>
+      </tr>
       <% end %>
     </tbody>
   </table>
-</div>
+  </div>
+  <% end %>
+  <% if @view_users and current_user.try(:admin?) %>
+  <strong>ユーザ</strong>
+  <div  class="container">
+    <% if @users.blank? %>
+      <strong>該当なし</strong>
+    <% end %>
+    <table class="table table-striped">
+    <tbody>
+      <% @users.each do |u| %>
+      <tr>
+        <td>
+          <%= link_to u do %>
+          <div>
+            <label class="long-text"><%= u.username %></label>
+          </div>
+          <% end %>
+        </td>
 
+        <td>
+          <%= link_to u do %>
+          <div>
+            <label class="long-text"><%= u.email %></label>
+          </div>
+          <% end %>
+        </td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  </div>
+  <% end %>
+</div>

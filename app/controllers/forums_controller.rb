@@ -22,6 +22,13 @@ class ForumsController < ApplicationController
     word = params["word"][0]
     topic_search={title_or_value_cont: word}
     comment_search={value_cont: word}
+    @view_topics = params[:topic]
+    @view_comments = params[:comment]
+    @view_users = params[:user]
+
+    if @view_topics.nil? and @view_comments.nil? and @view_users.nil?
+      @view_topics = @view_comments = @view_users = true
+    end
 
     date_params={}
     if params["between"].present?
@@ -50,15 +57,14 @@ class ForumsController < ApplicationController
     end
     topic_search.merge! date_params
     comment_search.merge! date_params
-    @topics = Topic.search(topic_search).result
-    @comments = Comment.search(comment_search).result
-    if current_user.try(:admin?)
+    @topics = Topic.search(topic_search).result if @view_topics
+    @comments = Comment.search(comment_search).result if @view_comments
+    if current_user.try(:admin?) and @view_users
       user_search={email_or_username_cont: word}
       user_search.merge! date_params
       @users = User.search(user_search).result
     end
   end
-
   def admin
   end
 end

@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   resources :topics do
     get 'page/:page', :action => :index, :on => :collection
   end
-  resources :categories
+  resources :categories do
+    get 'page/:page', :action => :index, :on => :collection
+  end
   devise_for :users, controllers: { sessions: "devise_ex/sessions" }
 
   root 'forums#index'

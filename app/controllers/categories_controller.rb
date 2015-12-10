@@ -5,7 +5,9 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-    @categories = Category.all
+    @column = params[:column].nil? ? :title : params[:column]
+    @order = params[:order] == "asc" ? 'desc': 'asc'
+    @categories = Category.all.order("#{@column} #{@order}").page params[:page]
   end
 
   # GET /categories/1

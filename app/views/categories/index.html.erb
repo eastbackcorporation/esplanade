@@ -1,23 +1,22 @@
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @categories.each do |category| %>
+<div class="container">
+  <table class="table table-striped table-hover">
+    <thead>
       <tr>
-        <td><%= category.title %></td>
-        <td><%= link_to 'Show', category %></td>
-        <td><%= link_to 'Edit', edit_category_path(category) %></td>
-        <td><%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th><%= link_to 'タイトル', controller: 'categories', action: 'index', page: 1, order: @order, column: 'title' %></th>
+        <th colspan="2"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
-<br>
+    </thead>
 
-<%= link_to '新規作成', new_category_path %>
-
+    <tbody>
+      <% @categories.each do |category| %>
+      <tr>
+        <td class="long-text"><%= link_to category.title, category %></td>
+        <td><%= link_to '変更', edit_category_path(category) %></td>
+        <td><%= link_to '削除', category, method: :delete, data: { confirm: '関連するトピックも閲覧できなくなります。よろしいですか？' } %></td>
+      </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="text-center"><%= paginate @categories %></div>
+  <%= link_to '新規作成', new_category_path %>
+</div>

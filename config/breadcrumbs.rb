@@ -3,6 +3,11 @@ crumb :root do
   link "ホーム", forums_home_path
 end
 
+crumb :search do
+  link "検索結果", forums_search_path
+  parent :root
+end
+
 crumb :categories do
   link "カテゴリ選択", categories_path
   parent :root

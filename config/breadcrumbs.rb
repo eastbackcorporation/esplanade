@@ -1,10 +1,10 @@
 # coding: utf-8
 crumb :root do
-  link "ホーム", forums_home_path
+  link "ホーム", home_forums_path
 end
 
 crumb :admin_root do
-  link "管理メニュー", forums_index_path
+  link "管理メニュー", forums_path
 end
 
 crumb :index_category do
@@ -18,7 +18,7 @@ crumb :new_category do
 end
 
 crumb :search do
-  link "検索結果", forums_search_path
+  link "検索結果", search_forums_path
   parent :root
 end
 

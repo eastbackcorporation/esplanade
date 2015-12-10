@@ -59,12 +59,12 @@ class ForumsController < ApplicationController
     end
     topic_search.merge! date_params
     comment_search.merge! date_params
-    @topics = Topic.search(topic_search).result if @view_topics
-    @comments = Comment.search(comment_search).result if @view_comments
+    @topics = Topic.search(topic_search).result.page params[:page] if @view_topics
+    @comments = Comment.search(comment_search).result.page params[:page] if @view_comments
     if current_user.try(:admin?) and @view_users
       user_search={email_or_username_cont: word}
       user_search.merge! date_params
-      @users = User.search(user_search).result
+      @users = User.search(user_search).result.page params[:page]
     end
   end
   def admin

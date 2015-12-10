@@ -8,11 +8,16 @@ Rails.application.routes.draw do
   end
   devise_for :users, controllers: { sessions: "devise_ex/sessions" }
 
+  resource :forums do
+    get 'index'
+    get 'admin'
+    get 'home'
+    post 'search'
+    get 'search'
+    get 'page/:page', :action => :index, :on => :collection
+  end
+
   root 'forums#index'
-  get 'forums/index'
-  get 'forums/admin'
-  get 'forums/home'
-  post 'forums/search'
 
   resources :users, :only => [:index, :show, :edit]
   post 'users/:id' => 'users#update'

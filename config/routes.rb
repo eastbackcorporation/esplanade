@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :comments
-  resources :topics
+  resources :topics do
+    get 'page/:page', :action => :index, :on => :collection
+  end
   resources :categories
   devise_for :users, controllers: { sessions: "devise_ex/sessions" }
 

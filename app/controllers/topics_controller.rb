@@ -8,7 +8,9 @@ class TopicsController < ApplicationController
   # GET /topics
   # GET /topics.json
   def index
-    @topics = Topic.all
+    @column = params[:column].nil? ? :title : params[:column]
+    @order = params[:order] == "asc" ? 'desc': 'asc'
+    @topics = Topic.joins(:category,:user).all.order("#{@column} #{@order}").page params[:page]
   end
 
   # GET /topics/1

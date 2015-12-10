@@ -53,6 +53,7 @@ ja:
     sessions:
       new:
         sign_in: "ログイン"
+        remember_me: "ログインを記憶"
     shared:
       links:
         back: "戻る"

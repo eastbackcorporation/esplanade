@@ -8,17 +8,19 @@ class DeviseEx::SessionsController < Devise::SessionsController
   # end
 
   def check_status
-    status = current_user.status
-    msg =
-      case User.statuses[status]
-      when User.statuses[:locked]
-        "このアカウントはロックされています。管理者に問い合わせてください。"
-      when User.statuses[:deleted]
-        "このアカウントは削除されています。"
+    status = current_user.try(:status)
+    unless status
+      msg =
+        case User.statuses[status]
+        when User.statuses[:locked]
+          "このアカウントはロックされています。管理者に問い合わせてください。"
+        when User.statuses[:deleted]
+          "このアカウントは削除されています。"
+        end
+      if msg
+        redirect_to root_path, notice: msg
+        sign_out(current_user)
       end
-    if msg
-      redirect_to root_path, notice: msg
-      sign_out(current_user)
     end
   end
   # POST /resource/sign_in

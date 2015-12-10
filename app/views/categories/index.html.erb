@@ -3,6 +3,7 @@
     <thead>
       <tr>
         <th><%= link_to 'タイトル', controller: 'categories', action: 'index', page: 1, order: @order, column: 'title' %></th>
+        <th>画像</th>
         <th colspan="2"></th>
       </tr>
     </thead>
@@ -11,6 +12,15 @@
       <% @categories.each do |category| %>
       <tr>
         <td class="long-text"><%= link_to category.title, category %></td>
+        <td >
+          <% if category.image.present? %>
+            <%= link_to category.image.url do %>
+              <%= image_tag category.image.thumb.url %>
+            <% end %>
+          <% else %>
+            なし
+          <% end %>
+        </td>
         <td><%= link_to '変更', edit_category_path(category) %></td>
         <td><%= link_to '削除', category, method: :delete, data: { confirm: '関連するトピックも閲覧できなくなります。よろしいですか？' } %></td>
       </tr>

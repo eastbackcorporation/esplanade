@@ -1,6 +1,8 @@
 class ForumsController < ApplicationController
   def index
-    redirect_to "/forums/home"
+    unless current_user.try(:admin?)
+      redirect_to "/forums/home"
+    end
   end
   def home
     @categories = Category.all

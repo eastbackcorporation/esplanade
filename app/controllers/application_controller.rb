@@ -23,10 +23,14 @@ protected
   end
 
   def after_sign_in_path_for(resource)
-    if (session[:previous_url] == root_path)
-      super
+    if current_user.try(:admin?)
+      root_path
     else
-      session[:previous_url] || root_path
+      if (session[:previous_url] == root_path)
+        super
+      else
+        session[:previous_url] || root_path
+      end
     end
   end
 private

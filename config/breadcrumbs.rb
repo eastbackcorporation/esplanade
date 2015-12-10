@@ -3,6 +3,20 @@ crumb :root do
   link "ホーム", forums_home_path
 end
 
+crumb :admin_root do
+  link "管理メニュー", forums_index_path
+end
+
+crumb :index_category do
+  link "カテゴリ一覧", categories_path
+  parent :admin_root
+end
+
+crumb :new_category do
+  link "カテゴリ作成", new_category_path
+  parent :index_category
+end
+
 crumb :search do
   link "検索結果", forums_search_path
   parent :root

@@ -13,6 +13,20 @@
     <nav>
     <div class="container">
       <div class="row">
+        <% if current_user.try(:admin?) %>
+        <div class="input-group pull-left">
+          <button type="button" class="btn btn-xs btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            管理メニュー<span class="caret"></span>
+        </button>
+          <ul class="dropdown-menu">
+            <li><%= link_to 'カテゴリ',categories_path %></li>
+            <li><%= link_to 'トピック',topics_path %></li>
+            <li><%= link_to 'コメント',comments_path %></li>
+            <li role="separator" class="divider"></li>
+          <li><%= link_to 'ユーザ', users_path %></li>
+          </ul>
+        </div>
+        <% end %>
         <div class="pull-right">
           <% if user_signed_in? %>
             <strong><%= link_to current_user.username, edit_user_registration_path %></strong>

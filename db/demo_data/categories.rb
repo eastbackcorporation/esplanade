@@ -1,5 +1,5 @@
 # coding: utf-8
-Category.find_or_create_by(id: 1,title: "カテゴリー関連"){|c| c.image = open "test/image/200x300.png"}
+Category.find_or_create_by(id: 1,title: "カテゴリー関連"){|c| c.image = open "#{Rails.root}/test/image/200x300.png"}
 Category.find_or_create_by(id: 2,title: "トピック関連")
 Category.find_or_create_by(id: 3,title: "コメント関連")
 Category.find_or_create_by(id: 4,title: "ユーザ関連")

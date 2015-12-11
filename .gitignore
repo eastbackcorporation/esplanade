@@ -11,3 +11,7 @@ public/uploads/
 *.swp
 *~
 .DS_Store
+
+#precompile files
+public/assets/*
+

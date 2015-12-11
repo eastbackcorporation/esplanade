@@ -17,6 +17,21 @@ crumb :new_category do
   parent :index_category
 end
 
+crumb :index_topic do
+  link "トピック一覧", topics_path
+  parent :admin_root
+end
+
+crumb :index_comment do
+  link "コメント一覧", comments_path
+  parent :admin_root
+end
+
+crumb :index_user do
+  link "ユーザ一覧", users_path
+  parent :admin_root
+end
+
 crumb :search do
   link "検索結果", search_forums_path
   parent :root

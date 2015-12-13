@@ -2,7 +2,6 @@
   <div class=" col-sm-10">
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put , class: "form-horizontal"}) do |f| %>
       <%= devise_error_messages! %>
-
       <div class="form-group">
         <%= f.label :username,class: "col-sm-4 control-label" %>
         <div class="col-sm-8 ">
@@ -40,6 +39,19 @@
         <div class="col-sm-8 ">
           <%= f.password_field :current_password, placeholder: t('.we_need_your_current_password_to_confirm_your_changes', :default => 'we need your current password to confirm your changes'), autocomplete: "off", class: "form-control" %>
         </div>
+      </div>
+      <div class="form-group">
+        <div class="btn btn-default" onclick="document.getElementById('user_image').click()">画像</div>
+        <img src="<%= current_user.image.thumb.url %>" id="preview" width="50px">
+        <div hidden="hidden" onchange="reader=new FileReader();file=document.getElementById('user_image');f=file.files;reader.readAsDataURL(f[0]);reader.onload =(function(){$('#preview').attr('src',reader.result);});"><%= f.file_field :image %></div>
+        <%= f.hidden_field :image_cache %>
+      </div>
+      <div class="from-group">
+        <% if current_user.image? %>
+          <label>
+            <%= f.check_box :remove_image %>remove
+          </label>
+        <% end %>
       </div>
 
       <div class="form-group">

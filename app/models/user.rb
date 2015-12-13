@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   attr_accessor :login
+  mount_uploader :image, ImageUploader
   enum status: [:active, :locked, :deleted]
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

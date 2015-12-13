@@ -4,15 +4,15 @@
       <%= devise_error_messages! %>
 
       <div class="form-group">
-        <%= f.label :email,class: "col-sm-4 control-label" %>
-        <div class="col-sm-8 ">
-          <%= f.email_field :email, class: "form-control" %>
-        </div>
-      </div>
-      <div class="form-group">
         <%= f.label :username,class: "col-sm-4 control-label" %>
         <div class="col-sm-8 ">
           <%= f.text_field :username, class: "form-control" %>
+        </div>
+      </div>
+      <div class="form-group">
+        <%= f.label :email,class: "col-sm-4 control-label" %>
+        <div class="col-sm-8 ">
+          <%= f.email_field :email, class: "form-control" %>
         </div>
       </div>
       <%- if devise_mapping.confirmable? && resource.pending_reconfirmation? -%>

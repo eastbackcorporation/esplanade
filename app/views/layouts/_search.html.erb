@@ -19,13 +19,13 @@
             </div>
             <div id="date" style="display: none;">
               <div class="col-xs-12 col-sm-3">
-                <%= text_field :created_at_gteq, value = nil, options ={placeholder: "start date", class: 'datepicker form-control'} %>
+                <%= text_field :created_at_gteq, value = nil, options ={readonly: "readonly", placeholder: "開始日", class: 'datepicker form-control'} %>
               </div>
               <div class="col-xs-1 hidden-xs">
                 <strong>〜</strong>
               </div>
               <div class="col-xs-12 col-sm-3">
-                <%= text_field :created_at_lteq, value = nil, options ={placeholder: "end date", class: 'datepicker form-control'} %>
+                <%= text_field :created_at_lteq, value = nil, options ={readonly: "readonly", placeholder: "終了日", class: 'datepicker form-control'} %>
                 </div>
             </div>
           </div>

@@ -37,9 +37,19 @@ class ForumsController < ApplicationController
       case params["between"]["datetime"]
       when "appoint"
         year,month,day = params["created_at_gteq"][0].split("/")
-        date_params[:created_at_gteq] = Time.new(year,month,day,0,0,0)
+        date_params[:created_at_gteq] = 
+          begin
+            Time.new(year,month,day,0,0,0)
+          rescue
+            Time.new - 100.year
+          end
         year,month,day = params["created_at_lteq"][0].split("/")
-        date_params[:created_at_lteq] = Time.new(year,month,day,24,0,0)
+        date_params[:created_at_lteq] =
+          begin
+            Time.new(year,month,day,24,0,0)
+          rescue
+            Time.new
+          end
       when "1hour"
         date_params[:created_at_gteq] = Time.now - 1.hour
         date_params[:created_at_lteq] = Time.now

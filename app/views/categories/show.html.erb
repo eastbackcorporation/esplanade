@@ -5,17 +5,22 @@
   <table class="table table-striped">
     <tbody>
       <% @category.topics.each do |t| %>
-      <tr>
-        <td>
-        <%= link_to t do %>
-        <div>
-          <strong><%= t.title %></strong>
-        </div>
-        <div>
-          <label class="long-text"><%= t.value %></label>
-        </div>
-        <% end %>
-        </td>
+        <tr>
+          <td>
+            <%= link_to t do %>
+              <div>
+                <% if t.user.image? %>
+                  <%= image_tag t.user.image.thumb.url, class: "img-circle", style: "height: 30px;width: 30px;" %>
+                <% else %>
+                  <%= image_tag "/avatar-default.png", class: "img-circle", style: "height: 30px;width: 30px;" %>
+                <% end %>
+                <strong><%= t.title %></strong>
+              </div>
+              <div>
+                <label class="long-text"><%= t.value %></label>
+              </div>
+            <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>

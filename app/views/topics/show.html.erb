@@ -1,45 +1,55 @@
 <% breadcrumb :topic, @topic %>
 <div class="container">
- <div class="panel panel-primary">
-   <div class="panel-heading">
-     <h3 class="panel-title">
-       <strong><%= @topic.title %></strong><br />
-       <small>
-         投稿者：<%= @topic.user.username %>
-         &nbsp;&nbsp;
-         <%= @topic.created_at.to_s %>
-       </small>
-     </h3>
-   </div>
-   <div class="panel-body">
-     <%= simple_format(h(@topic.value)) %>
-   </div>
- </div>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        <strong><%= @topic.title %></strong><br />
+        <small>
+          <% if @topic.user.image? %>
+            <%= image_tag @topic.user.image.thumb.url, class: "img-circle", style: "height: 30px;width: 30px;" %>
+          <% else %>
+            <%= image_tag "/avatar-default.png", class: "img-circle", style: "height: 30px;width: 30px;" %>
+          <% end %>
+          投稿者：<%= @topic.user.username %>
+        &nbsp;&nbsp;
+        <%= @topic.created_at.to_s %>
+        </small>
+      </h3>
+    </div>
+    <div class="panel-body">
+      <%= simple_format(h(@topic.value)) %>
+    </div>
+  </div>
 
- <% @topic.comments.each do |comment| %>
-          <div class="panel panel-info">
-            <div class="panel-heading">
-              <h3 class="panel-title">
-                <small>
-                  投稿者：<%= h(comment.user.username) %>
-                  &nbsp;&nbsp;
-                  <%= comment.created_at.to_s %>
-                </small>
-              </h3>
-            </div>
-            <div class="panel-body">
-              <% if comment.image.url.present? %>
-                <%= link_to comment.image.url do %>
-                  <%= image_tag comment.image.thumb.url, class: "img-responsive center-block"%>
-                <% end %>
-              <% end %>
-              <%= simple_format(h(comment.value)) %>
-            </div>
-          </div>
-<% end %>
-<% if user_signed_in? %>
-  <%= render template: "comments/new" %>
-<% end %>
+  <% @topic.comments.each do |comment| %>
+    <div class="panel panel-info">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <small>
+            <% if comment.user.image? %>
+              <%= image_tag comment.user.image.thumb.url, class: "img-circle", style: "height: 30px;width: 30px;" %>
+            <% else %>
+              <%= image_tag "/avatar-default.png", class: "img-circle", style: "height: 30px;width: 30px;" %>
+            <% end %>
+            投稿者：<%= h(comment.user.username) %>
+          &nbsp;&nbsp;
+          <%= comment.created_at.to_s %>
+          </small>
+        </h3>
+      </div>
+      <div class="panel-body">
+        <% if comment.image.url.present? %>
+          <%= link_to comment.image.url do %>
+            <%= image_tag comment.image.thumb.url, class: "img-responsive center-block"%>
+          <% end %>
+        <% end %>
+        <%= simple_format(h(comment.value)) %>
+      </div>
+    </div>
+  <% end %>
+  <% if user_signed_in? %>
+    <%= render template: "comments/new" %>
+  <% end %>
 
-<input type="button" class="btn btn-default" value="戻る" onclick="history.back()">
+  <input type="button" class="btn btn-default" value="戻る" onclick="history.back()">
 </div>

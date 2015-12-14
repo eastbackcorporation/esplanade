@@ -3,7 +3,7 @@
 <div  class="container">
   <table class="table table-striped">
     <tbody>
-      <% @category.topics.each do |t| %>
+      <% @category.topics.select{|t| !t.deleted?}.each do |t| %>
         <tr>
           <td>
             <%= link_to t do %>

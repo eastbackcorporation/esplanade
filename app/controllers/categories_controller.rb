@@ -13,6 +13,9 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
+    if @category.deleted?
+      render text: "このカテゴリは削除されています。"
+    end
   end
 
   # GET /categories/new

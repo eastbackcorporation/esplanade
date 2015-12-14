@@ -1,4 +1,3 @@
-<p id="notice"><%= notice %></p>
 <% breadcrumb :topics, @category %>
 
 <div  class="container">
@@ -25,7 +24,9 @@
       <% end %>
     </tbody>
   </table>
-  <%= link_to "新規作成", new_topic_path(category_id: @category.id) %>
+  <div class="pull-right">
+    <%= link_to "新規作成", new_topic_path(category_id: @category.id), class: "btn btn-primary" %>
+  </div>
 </div>
 
 

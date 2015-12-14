@@ -1,5 +1,5 @@
 class CategoriesController < ApplicationController
-  before_action :admin_required, only: [:index,:new,:create,:edit, :update, :destory]
+  before_action :admin_required, only: [:index,:new,:create,:edit, :update, :destroy]
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
   # GET /categories
@@ -57,21 +57,21 @@ class CategoriesController < ApplicationController
   # DELETE /categories/1
   # DELETE /categories/1.json
   def destroy
-    @category.destroy
-    respond_to do |format|
-      format.html { redirect_to categories_url, notice: 'Category was successfully destroyed.' }
-      format.json { head :no_content }
+    @category.status = Category.statuses[:deleted]
+    if  @category.save
+      respond_to do |format|
+        format.html { redirect_to categories_url, notice: '関連するトピック、コメントは表示されなくなりました。' }
+      end
     end
   end
-
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_category
-      @category = Category.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_category
+    @category = Category.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def category_params
-      params.require(:category).permit(:title, :image, :image_cache, :remove_image)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def category_params
+    params.require(:category).permit(:title, :image, :image_cache, :remove_image)
+  end
 end

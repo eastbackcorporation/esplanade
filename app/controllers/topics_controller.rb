@@ -16,6 +16,10 @@ class TopicsController < ApplicationController
   # GET /topics/1
   # GET /topics/1.json
   def show
+    if @topic.deleted? or @topic.category.deleted?
+      render text: "このトピックは削除されています。"
+    end
+
     @comment = Comment.new
     @comment.topic_id = @topic.id
     if user_signed_in?

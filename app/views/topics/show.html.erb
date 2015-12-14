@@ -21,7 +21,10 @@
     </div>
   </div>
 
-  <% @topic.comments.each do |comment| %>
+  <% @topic.comments
+  .select{|c| !c.deleted?}
+  .sort{|a,b| a.created_at <=> b.created_at }
+  .each do |comment| %>
     <div class="panel panel-info">
       <div class="panel-heading">
         <h3 class="panel-title">
@@ -48,7 +51,13 @@
     </div>
   <% end %>
   <% if user_signed_in? %>
-    <%= render template: "comments/new" %>
+    <% if @topic.active? %>
+      <%= render template: "comments/new" %>
+    <% elsif @topic.archived? %>
+    <div class="text-center">
+      <strong>このトピックは、アーカイブされています。コメントの投稿はできません。</strong>
+      </div>
+    <% end %>
   <% end %>
 
   <input type="button" class="btn btn-default" value="戻る" onclick="history.back()">

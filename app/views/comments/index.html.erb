@@ -6,6 +6,7 @@
         <th><%= link_to 'コメント', controller: 'comments', action: 'index', page: 1, order: @order, column: 'value' %></th>
         <th><%= link_to 'ユーザ', controller: 'comments', action: 'index', page: 1, order: @order, column: 'users.username' %></th>
         <th><%= link_to '作成日', controller: 'comments', action: 'index', page: 1, order: @order, column: 'created_at' %></th>
+        <th><%= link_to 'ステータス', controller: 'comments', action: 'index', page: 1, order: @order, column: 'status' %></th>
         <th><%= link_to 'トピック', controller: 'comments', action: 'index', page: 1, order: @order, column: 'topics.title' %></th>
 
         <th colspan="2"></th>
@@ -18,6 +19,7 @@
           <td class="long-text"><%= link_to comment.value, comment %></td>
           <td class="long-text"><%= comment.user.username %></td>
           <td class="long-text"><%= comment.created_at.to_s %></td>
+          <td class="long-text"><%= comment.status %></td>
           <td class="long-text"><%= comment.topic.title %></td>
           <td><%= link_to '変更', edit_comment_path(comment) %></td>
           <td><%= link_to '削除', comment, method: :delete, data: { confirm: '一般ユーザが閲覧できなくなります。よろしいですか？' } %></td>

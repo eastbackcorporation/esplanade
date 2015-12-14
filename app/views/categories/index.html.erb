@@ -6,6 +6,7 @@
       <tr>
         <th><%= link_to 'タイトル', controller: 'categories', action: 'index', page: 1, order: @order, column: 'title' %></th>
         <th>画像</th>
+        <th>ステータス</th>
         <th colspan="2"></th>
       </tr>
     </thead>
@@ -23,6 +24,7 @@
             なし
           <% end %>
         </td>
+        <td><%= category.status %></td>
         <td><%= link_to '変更', edit_category_path(category) %></td>
         <td><%= link_to '削除', category, method: :delete, data: { confirm: '関連するトピックも閲覧できなくなります。よろしいですか？' } %></td>
       </tr>

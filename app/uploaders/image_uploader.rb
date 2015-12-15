@@ -14,6 +14,35 @@ class ImageUploader < CarrierWave::Uploader::Base
   storage :file
   # storage :fog
 
+  def logical_delete(file_path)
+    file_name = File.basename(file_path)
+    del_key = Digest::SHA256.hexdigest file_name + Rails.application.secrets.secret_key_base
+    File.rename(file_path, file_path+del_key)
+  end
+
+  def logical_delete_all
+    logical_delete(path)
+    versions.each_value{|v| logical_delete(v.path)}
+  end
+
+  def logical_restore(file_path)
+    file_name = File.basename(file_path)
+    del_key = Digest::SHA256.hexdigest file_name + Rails.application.secrets.secret_key_base
+    File.rename(file_path+del_key, file_path)
+  end
+
+  def logical_restore_all
+    logical_restore(path)
+    versions.each_value{|v| logical_restore(v.path)}
+  end
+
+  def url
+    if super and File.exist?(path)
+      super
+    else
+      "/NoImage.png"
+    end
+  end
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
   def store_dir

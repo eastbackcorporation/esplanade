@@ -19,7 +19,7 @@
           <td class="long-text"><%= topic.value %></td>
           <td class="long-text"><%= topic.category.title %></td>
           <td class="long-text"><%= topic.user.username %></td>
-          <td class="long-text"><%= topic.status%></td>
+          <td class="long-text"><%= I18n.t "topic_status.#{topic.status}"%></td>
           <td class="col-xs-1"><%= link_to edit_topic_path(topic) do %>
             <span class=" btn btn-success glyphicon glyphicon-edit"></span>
           <% end %>

@@ -35,7 +35,7 @@
               <label>
                 <input type="radio" value="option1" checked="">
                 <% check = @topic.status == s ? "checked" : ""%>
-                <%= f.radio_button :status, s, checked: check %><%= s %>
+                <%= f.radio_button :status, s, checked: check %><%= I18n.t("topic_status.#{s}") %>
               </label>
             </div>
             <% end %>
@@ -43,8 +43,11 @@
         </div>
       <% end %>
       <div class="form-group">
-        <div class="col-lg-10 col-lg-offset-2">
-          <%= f.submit '投稿', class: "btn btn-primary" %>
+        <div class="pull-left">
+          <input type="button" class="btn btn-default" value="戻る" onclick="history.back()">
+        </div>
+        <div class="pull-right">
+          <%= f.submit class: "btn btn-primary" %>
         </div>
       </div>
     </fieldset>

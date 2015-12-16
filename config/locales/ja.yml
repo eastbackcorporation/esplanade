@@ -1,4 +1,9 @@
 ja:
+  helpers:
+    submit:
+      create: "投稿"
+      update: "更新"
+      submit: "保存"
   views:
     pagination:
       first: "&laquo;"
@@ -6,3 +11,18 @@ ja:
       previous: "&lsaquo;"
       next: "&rsaquo;"
       truncate: "..."
+  category_status:
+    active: "アクティブ"
+    deleted: "削除"
+  topic_status:
+    active: "アクティブ"
+    archived: "書込み禁止"
+    deleted: "削除"
+  comment_status:
+    active: "アクティブ"
+    deleted: "削除"
+  user_status:
+    active: "アクティブ"
+    locked: "ロック"
+    deleted: "削除"
+

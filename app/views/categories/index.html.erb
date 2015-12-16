@@ -29,7 +29,7 @@
               なし
             <% end %>
           </td>
-          <td><%= category.status %></td>
+          <td><%= I18n.t("category_status.#{category.status}") %></td>
           <td class="col-xs-1"><%= link_to edit_category_path(category) do %>
             <span class=" btn btn-success glyphicon glyphicon-edit"></span>
           <% end %>

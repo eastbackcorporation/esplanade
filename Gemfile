@@ -5,14 +5,7 @@ gem 'devise'
 gem 'devise-i18n'
 gem 'devise-i18n-views'
 
-# responsive design
-gem 'bootstrap-sass', '~> 3.3.5'
-
-# View Design
-gem 'twitter-bootswatch-rails'
-gem 'twitter-bootswatch-rails-helpers'
-gem 'execjs'
-gem 'less-rails'
+# Bréadcrùmbs
 gem 'gretel'
 
 # Image Uploder

@@ -42,9 +42,13 @@
           <div class="form-group">
             <%= form_tag({controller: "/forums", action: "search"},class: "form-inline") do %>
             <%= text_field :word, value = nil, options = {} %>
-            <%= submit_tag "検索", class: "btn btn-primary" %>
+            <%= button_tag(type: "submit", class: "btn btn-primary", name: "commit", value: "search") do %>
+                <span class="glyphicon glyphicon-search"></span>
+              <% end %> 
             <!-- 詳細 -->
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target=".search-modal">詳細</button>
+            <button type="button" class="btn btn-default " data-toggle="modal" data-target=".search-modal">
+              <span class="glyphicon glyphicon-option-vertical"></span>
+            </button>
           <% end %>
           <%= render "layouts/search" %>
           <!--詳細end -->

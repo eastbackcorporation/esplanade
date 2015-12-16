@@ -43,7 +43,7 @@
       <div class="form-group">
         <div class="btn btn-default" onclick="document.getElementById('user_image').click()">画像</div>
         <img src="<%= current_user.image.thumb.url %>" id="preview" width="50px">
-        <div hidden="hidden" onchange="reader=new FileReader();file=document.getElementById('user_image');f=file.files;reader.readAsDataURL(f[0]);reader.onload =(function(){$('#preview').attr('src',reader.result);});"><%= f.file_field :image %></div>
+        <div hidden="hidden" onchange="$('#preview').hide();reader=new FileReader();file=document.getElementById('user_image');f=file.files;reader.readAsDataURL(f[0]);reader.onload =(function(){$('#preview').show();$('#preview').attr('src',reader.result);});"><%= f.file_field :image %></div>
         <%= f.hidden_field :image_cache %>
       </div>
       <div class="from-group">

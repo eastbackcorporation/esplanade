@@ -1,33 +1,44 @@
 <% breadcrumb :index_category %>
 <div class="container">
-  <div class="pull-right"><%= link_to '新規作成', new_category_path, class: "btn btn-success" %></div>
+  <div class="pull-right">
+    <%= link_to new_category_path, class: "btn btn-success" do %>
+      <span class="glyphicon glyphicon-plus"></span>
+    <% end %>
+  </div>
+
   <table class="table table-striped table-hover">
     <thead>
       <tr>
         <th><%= link_to 'タイトル', controller: 'categories', action: 'index', page: 1, order: @order, column: 'title' %></th>
-        <th>画像</th>
-        <th>ステータス</th>
-        <th colspan="2"></th>
+        <th class="col-xs-2">画像</th>
+        <th class="col-xs-2">ステータス</th>
+        <th colspan="2" class="col-xs-2"></th>
       </tr>
     </thead>
 
     <tbody>
       <% @categories.each do |category| %>
-      <tr>
-        <td class="long-text"><%= link_to category.title, category %></td>
-        <td >
-          <% if category.image.present? %>
-            <%= link_to category.image.url do %>
-              <%= image_tag category.image.thumb.url %>
+        <tr>
+          <td class="long-text"><%= link_to category.title, category %></td>
+          <td >
+            <% if category.image.present? %>
+              <%= link_to category.image.url do %>
+                <%= image_tag category.image.thumb.url %>
+              <% end %>
+            <% else %>
+              なし
             <% end %>
-          <% else %>
-            なし
+          </td>
+          <td><%= category.status %></td>
+          <td class="col-xs-1"><%= link_to edit_category_path(category) do %>
+            <span class=" btn btn-success glyphicon glyphicon-edit"></span>
           <% end %>
-        </td>
-        <td><%= category.status %></td>
-        <td><%= link_to '変更', edit_category_path(category) %></td>
-        <td><%= link_to '削除', category, method: :delete, data: { confirm: '関連するトピックも閲覧できなくなります。よろしいですか？' } %></td>
-      </tr>
+          </td>
+          <td class="col-xs-1"><%= link_to category, method: :delete, data: { confirm: '関連するトピックも閲覧できなくなります。よろしいですか？' } do %>
+            <span class="btn btn-danger glyphicon glyphicon-trash"></span>
+          <% end %>
+          </td>
+        </tr>
       <% end %>
     </tbody>
   </table>
@@ -36,7 +47,9 @@
       <input type="button" class="btn btn-default" value="戻る" onclick="history.back()">
     </div>
     <div class="pull-right">
-      <%= link_to '新規作成', new_category_path, class: "btn btn-success" %>
+      <%= link_to new_category_path, class: "btn btn-success" do %>
+        <span class="glyphicon glyphicon-plus"></span>
+      <% end %>
     </div>
   </div>
   <div class="text-center"><%= paginate @categories %></div>

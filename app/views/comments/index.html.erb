@@ -9,7 +9,7 @@
         <th><%= link_to 'ステータス', controller: 'comments', action: 'index', page: 1, order: @order, column: 'status' %></th>
         <th><%= link_to 'トピック', controller: 'comments', action: 'index', page: 1, order: @order, column: 'topics.title' %></th>
 
-        <th colspan="2"></th>
+        <th colspan="2" class="col-xs-2"></th>
       </tr>
     </thead>
 
@@ -21,8 +21,14 @@
           <td class="long-text"><%= comment.created_at.to_s %></td>
           <td class="long-text"><%= comment.status %></td>
           <td class="long-text"><%= comment.topic.title %></td>
-          <td><%= link_to '変更', edit_comment_path(comment) %></td>
-          <td><%= link_to '削除', comment, method: :delete, data: { confirm: '一般ユーザが閲覧できなくなります。よろしいですか？' } %></td>
+          <td class="col-xs-1"><%= link_to edit_comment_path(comment) do %>
+            <span class=" btn btn-success glyphicon glyphicon-edit"></span>
+          <% end %>
+          </td>
+          <td class="col-xs-1"><%= link_to comment, method: :delete, data: { confirm: '一般ユーザが閲覧できなくなります。よろしいですか？' } do %>
+            <span class="btn btn-danger glyphicon glyphicon-trash"></span>
+          <% end %>
+          </td>
         </tr>
       <% end %>
     </tbody>

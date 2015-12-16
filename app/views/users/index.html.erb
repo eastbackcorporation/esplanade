@@ -14,7 +14,10 @@
           <td><%= link_to user.username, user %></td>
           <td><%= user.email %></td>
           <td><%= "管理者" if user.admin? %></td>
-          <td><%= link_to "編集" , edit_user_path(user) %></td>
+          <td class="col-xs-1"><%= link_to edit_user_path(user) do %>
+            <span class=" btn btn-success glyphicon glyphicon-edit"></span>
+          <% end %>
+          </td>
         </tr>
       <% end %>
     </table>

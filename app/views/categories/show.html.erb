@@ -25,7 +25,10 @@
     </tbody>
   </table>
   <div class="pull-right">
-    <%= link_to "新規作成", new_topic_path(category_id: @category.id), class: "btn btn-primary" %>
+    <%= link_to new_topic_path(category_id: @category.id), class: "btn btn-primary" do %>
+              <span class="glyphicon glyphicon-plus"></span>
+            <% end %>
+
   </div>
 </div>
 

@@ -5,19 +5,19 @@ class ForumsController < ApplicationController
     end
   end
   def home
-    @categories = Category.all
+    @categories = Category.where.not(status: Category.statuses[:deleted])
 
     late = Time.now - 3.day
-    @created_topics = Topic.search(created_at_gteq: late)
-                      .result
-                      .order('created_at desc')
+    @created_topics = Topic.where("created_at >= ?", late)
+                           .where.not("status = ?",Topic.statuses[:deleted])
+                           .order('created_at desc')
 
-    @wrote_topics = Comment.joins(:topic)
-                    .select("topics.*")
-                    .search(created_at_gteq: late)
-                    .result
-                    .order('created_at desc')
-                    .uniq
+    @wrote_topics = Topic.joins(:comments)
+                         .select("topics.*")
+                         .where("comments.created_at >= ?", late)
+                         .where.not("comments.status = ?", Comment.statuses[:deleted])
+                         .where.not("topics.status = ?", Topic.statuses[:deleted])
+                         .uniq
   end
   def search
     #@categories = Category.search(title_cont: params["word"][0]).result

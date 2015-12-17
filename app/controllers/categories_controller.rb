@@ -14,7 +14,12 @@ class CategoriesController < ApplicationController
   # GET /categories/1.json
   def show
     if @category.deleted?
-      render text: "このカテゴリは削除されています。"
+      msg = "カテゴリが削除されています"
+      if current_user.try(:admin)
+        flash[:notice] = msg
+      else
+        render text: msg
+      end
     end
   end
 

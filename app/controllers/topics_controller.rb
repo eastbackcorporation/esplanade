@@ -13,11 +13,15 @@ class TopicsController < ApplicationController
     @topics = Topic.joins(:category,:user).all.order("#{@column} #{@order}").page params[:page]
   end
 
-  # GET /topics/1
-  # GET /topics/1.json
   def show
     if @topic.deleted? or @topic.category.deleted?
-      render text: "このトピックは削除されています。"
+      msg = "このトピックは削除されています。" if @topic.deleted?
+      msg = "もとのカテゴリが削除されています" if @topic.category.deleted?
+      if current_user.try(:admin)
+        flash[:notice] = msg
+      else
+        render text: msg
+      end
     end
 
     @comment = Comment.new
@@ -59,11 +63,9 @@ class TopicsController < ApplicationController
   def update
     respond_to do |format|
       if @topic.update(topic_params)
-        format.html { redirect_to @topic, notice: 'Topic was successfully updated.' }
-        format.json { render :show, status: :ok, location: @topic }
+        format.html { redirect_to topics_path, notice: 'updated.' }
       else
         format.html { render :edit }
-        format.json { render json: @topic.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -80,21 +82,21 @@ class TopicsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_topic
-      @topic = Topic.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_topic
+    @topic = Topic.find(params[:id])
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def topic_params
-      params.require(:topic).permit(:title, :value, :category_id, :status)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def topic_params
+    params.require(:topic).permit(:title, :value, :category_id, :status)
+  end
 
-    def not_view_deleted_topic
-      unless current_user.try(:admin?)
-        if @topic.deleted?
-          redirect_to root_path
-        end
+  def not_view_deleted_topic
+    unless current_user.try(:admin?)
+      if @topic.deleted?
+        redirect_to root_path
       end
     end
+  end
 end

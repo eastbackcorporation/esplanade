@@ -3,22 +3,37 @@
 <div  class="container">
   <table class="table table-striped">
     <tbody>
-      <% @category.topics.select{|t| !t.deleted?}.each do |t| %>
+      <% @category.topics.select{|t| !t.deleted?}.sort{|a,b|b.created_at <=> a.created_at}.each do |t| %>
         <tr>
           <td>
             <%= link_to t do %>
-              <div>
+              <div class="col-xs-1">
                 <% if t.user.image? %>
                   <%= image_tag t.user.image.thumb.url, class: "img-circle", style: "height: 30px;width: 30px;" %>
                 <% else %>
                   <%= image_tag "/avatar-default.png", class: "img-circle", style: "height: 30px;width: 30px;" %>
                 <% end %>
-                <strong><%= t.title %></strong>
               </div>
-              <div>
-                <label class="long-text"><%= t.value %></label>
-              </div>
+              <div class="col-xs-7">
+                <div>
+                  <strong><%= t.title %></strong>
+                </div>
+                <div>
+                  <label class="long-text"><%= t.value %></label>
+                </div>
+              </div >
             <% end %>
+            <div class="col-xs-3">
+              <label class="long-text" style="font-size: xx-small;">
+                作成者:<%= t.user.username %>
+            </label>
+            <label class="long-text" style="font-size: xx-small;">
+              <%= t.comments.count %>件のコメント
+            </label>
+            <label class="long-text" style="font-size: xx-small;">
+              最終更新:<%= twt(t.updated_at) %>
+          </label>
+            </div>
           </td>
         </tr>
       <% end %>
@@ -26,8 +41,8 @@
   </table>
   <div class="pull-right">
     <%= link_to new_topic_path(category_id: @category.id), class: "btn btn-primary" do %>
-              <span class="glyphicon glyphicon-plus"></span>
-            <% end %>
+      <span class="glyphicon glyphicon-plus"></span>
+    <% end %>
 
   </div>
 </div>

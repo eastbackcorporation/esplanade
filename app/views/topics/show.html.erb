@@ -12,7 +12,7 @@
           <% end %>
           投稿者：<%= @topic.user.username %>
         &nbsp;&nbsp;
-        <%= @topic.created_at.to_s %>
+        <%= twt(@topic.created_at) %>
         </small>
       </h3>
     </div>
@@ -36,7 +36,7 @@
             <% end %>
             投稿者：<%= h(comment.user.username) %>
           &nbsp;&nbsp;
-          <%= comment.created_at.to_s %>
+          <%= twt(comment.created_at) %>
           </small>
         </h3>
       </div>

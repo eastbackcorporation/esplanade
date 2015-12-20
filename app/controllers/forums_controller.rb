@@ -1,4 +1,6 @@
 class ForumsController < ApplicationController
+  before_action :set_date_params, only: [:search]
+  before_action :set_status_params, only: [:search]
   def index
     unless current_user.try(:admin?)
       redirect_to "/forums/home"
@@ -31,8 +33,59 @@ class ForumsController < ApplicationController
     if @view_topics.nil? and @view_comments.nil? and @view_users.nil?
       @view_topics = @view_comments = @view_users = true
     end
+    topic_search.merge! @date_params
+    comment_search.merge! @date_params
+    if current_user.try(:admin?) and @view_users
+      p params
+      @topics = Topic.search(topic_search).result.where("status in (?)",@topic_statuses).page params[:page] if @view_topics
+      @comments = Comment.search(comment_search).result.where("status in (?)",@comment_statuses).page params[:page] if @view_comments
+      user_search={email_or_username_cont: word}
+      user_search.merge! @date_params
+      @users = User.search(user_search).result.where("status in (?)",@user_statuses).page params[:page]
+    else
+      @topics = Topic.search(topic_search).result.page params[:page] if @view_topics
+      @comments = Comment.search(comment_search).result.page params[:page] if @view_comments
+    end
+  end
+  def admin
+  end
 
-    date_params={}
+  private
+  def set_status_params
+    @category_statuses = []
+    @topic_statuses = []
+    @comment_statuses = []
+    @user_statuses = []
+    if params["category_statuses"]
+      params["category_statuses"].each_key do |s|
+        @category_statuses << Category.statuses[s]
+      end
+    end
+    if params["topic_statuses"]
+      params["topic_statuses"].each_key do |s|
+        @topic_statuses << Topic.statuses[s]
+      end
+    end
+    if params["comment_statuses"]
+      params["comment_statuses"].each_key do |s|
+        @comment_statuses << Comment.statuses[s]
+      end
+    end
+    if params["user_statuses"]
+      params["user_statuses"].each_key do |s|
+        @user_statuses << User.statuses[s]
+      end
+    end
+    if    @category_statuses.blank? and @topic_statuses.blank? and @comment_statuses.blank? and @user_statuses.blank?
+
+      @category_statuses = Category.statuses.values
+      @topic_statuses = Topic.statuses.values
+      @comment_statuses = Comment.statuses.values
+      @user_statuses = User.statuses.values
+    end
+  end
+  def set_date_params
+    @date_params={}
     if params["between"].present?
       case params["between"]["datetime"]
       when "appoint"
@@ -67,16 +120,5 @@ class ForumsController < ApplicationController
         date_params[:created_at_lteq] = Time.now
       end
     end
-    topic_search.merge! date_params
-    comment_search.merge! date_params
-    @topics = Topic.search(topic_search).result.page params[:page] if @view_topics
-    @comments = Comment.search(comment_search).result.page params[:page] if @view_comments
-    if current_user.try(:admin?) and @view_users
-      user_search={email_or_username_cont: word}
-      user_search.merge! date_params
-      @users = User.search(user_search).result.page params[:page]
-    end
-  end
-  def admin
   end
 end

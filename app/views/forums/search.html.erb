@@ -19,69 +19,90 @@
             <div>
               <label class="long-text"><%= t.value %></label>
             </div>
-            <% end %>
+          <% end %>
           </td>
+          <% if current_user.try(:admin?) %>
+            <td class="col-xs-1">
+              <%= link_to edit_topic_path(t) do %>
+                <span class=" btn btn-success glyphicon glyphicon-edit"></span>
+              <% end %>
+            </td>
+          <% end %>
         </tr>
-        <% end %>
+      <% end %>
       </tbody>
     </table>
     <div class="text-center"><%= paginate @topics %></div>
   </div>
-  <% end %>
-  <% if @view_comments %>
+<% end %>
+<% if @view_comments %>
   <strong>コメント</strong>
   <div  class="container">
     <% if @comments.blank? %>
       <strong>該当なし</strong>
     <% end %>
     <table class="table table-striped">
-    <tbody>
-      <% @comments.each do |c| %>
-      <tr>
-        <td>
-          <%= link_to c.topic do %>
-          <div>
-            <label class="long-text"><%= c.value %></label>
-          </div>
+      <tbody>
+        <% @comments.each do |c| %>
+          <tr>
+            <td>
+              <%= link_to c.topic do %>
+                <div>
+                  <label class="long-text"><%= c.value %></label>
+                </div>
+              <% end %>
+            </td>
+          <% if current_user.try(:admin?) %>
+            <td class="col-xs-1">
+              <%= link_to edit_comment_path(c) do %>
+                <span class=" btn btn-success glyphicon glyphicon-edit"></span>
+              <% end %>
+            </td>
           <% end %>
-        </td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
   <div class="text-center"><%= paginate @comments %></div>
-  <% end %>
-  <% if @view_users and current_user.try(:admin?) %>
+<% end %>
+<% if @view_users and current_user.try(:admin?) %>
   <strong>ユーザ</strong>
   <div  class="container">
     <% if @users.blank? %>
       <strong>該当なし</strong>
     <% end %>
     <table class="table table-striped">
-    <tbody>
-      <% @users.each do |u| %>
-      <tr>
-        <td>
-          <%= link_to u do %>
-          <div>
-            <label class="long-text"><%= u.username %></label>
-          </div>
-          <% end %>
-        </td>
+      <tbody>
+        <% @users.each do |u| %>
+          <tr>
+            <td>
+              <%= link_to u do %>
+                <div>
+                  <label class="long-text"><%= u.username %></label>
+                </div>
+              <% end %>
+            </td>
 
-        <td>
-          <%= link_to u do %>
-          <div>
-            <label class="long-text"><%= u.email %></label>
-          </div>
+            <td>
+              <%= link_to u do %>
+                <div>
+                  <label class="long-text"><%= u.email %></label>
+                </div>
+              <% end %>
+            </td>
+          <% if current_user.try(:admin?) %>
+            <td class="col-xs-1">
+              <%= link_to edit_user_path(u) do %>
+                <span class=" btn btn-success glyphicon glyphicon-edit"></span>
+              <% end %>
+            </td>
           <% end %>
-        </td>
-      </tr>
-      <% end %>
-    </tbody>
-  </table>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
   </div>
   <div class="text-center"><%= paginate @users %></div>
-  <% end %>
+<% end %>
 </div>

@@ -1,10 +1,10 @@
 # coding: utf-8
 steps_for :login do
+  tag = self.tag
+
   step 'ログインデータがある' do
-    User.create(email: "test@example.com",
-                username: "testuser",
-                password: "test1234",
-                password_confirmation: "test1234")
+    @sc = ScreenshotPath.new(tag)
+    @user_info = create_user
   end
 
   step 'サイトにアクセスする' do
@@ -13,16 +13,18 @@ steps_for :login do
 
   step 'ログインページを表示する' do
     visit '/'
+    save_screenshot(@sc.path)
   end
 
   step '画面にログインと表示されていること' do
     expect(page).to have_content('ログイン')
+    save_screenshot(@sc.path)
   end
 
   step 'idとpasswordを入力する' do
     visit '/users/sign_in'
-    fill_in 'user[login]', :with => 'test@example.com'
-    fill_in 'user[password]', :with => 'test1234'
+    fill_in 'user[login]', :with => @user_info.username
+    fill_in 'user[password]', :with => @user_info.password
   end
 
   step 'ログインボタンをクリックする' do
@@ -35,15 +37,16 @@ steps_for :login do
 
   step "画面にユーザ名が表示されること" do
     step "view 'testuser' on screen"
+    save_screenshot(@sc.path)
   end
 end
 
 steps_for :fail_login do
+  tag = self.tag
+
   step 'ログインデータがある' do
-    User.create(email: "test@example.com",
-                username: "testuser",
-                password: "test1234",
-                password_confirmation: "test1234")
+    @sc = ScreenshotPath.new(tag)
+    @user_info = create_user
   end
 
   step 'サイトにアクセスする' do
@@ -60,8 +63,9 @@ steps_for :fail_login do
 
   step 'idと間違いのpasswordを入力する' do
     visit '/users/sign_in'
-    fill_in 'user[login]', :with => 'test@example.com'
-    fill_in 'user[password]', :with => 'test123456789'
+    fill_in 'user[login]', :with => @user_info.username
+    fill_in 'user[password]', :with => @user_info.password + "xxxx"
+    save_screenshot(@sc.path)
   end
 
   step 'ログインボタンをクリックする' do
@@ -73,6 +77,7 @@ steps_for :fail_login do
   end
 
   step "画面にユーザ名が表示されていないこと" do
-    step "not view 'testuser' on screen"
+    step "not view '#{@user_info.username}' on screen"
+    save_screenshot(@sc.path)
   end
 end

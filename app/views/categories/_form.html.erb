@@ -4,9 +4,9 @@
       <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
 
       <ul>
-      <% @category.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
+        <% @category.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -20,22 +20,36 @@
     </div>
     <div class="form-group">
       <% if @category.image? %>
-      <strong>画像</strong>
-      <div class="thumbnail">
-        <%= image_tag @category.image.url %>
-      </div>
+        <strong>画像</strong>
+        <div class="thumbnail">
+          <%= image_tag @category.image.url %>
+        </div>
       <% end %><br>
       <div class="btn btn-default" onclick="document.getElementById('category_image').click()">画像</div>
-        <img src="" id="preview" width="50px" hidden="hidden">
-        <div hidden="hidden" onchange="$('#preview').hide();reader=new FileReader();file=document.getElementById('category_image');f=file.files;reader.readAsDataURL(f[0]);reader.onload =(function(){$('#preview').show();$('#preview').attr('src',reader.result);});"><%= f.file_field :image %></div>
+      <img src="" id="preview" width="50px" hidden="hidden">
+      <div hidden="hidden" onchange="$('#preview').hide();reader=new FileReader();file=document.getElementById('category_image');f=file.files;reader.readAsDataURL(f[0]);reader.onload =(function(){$('#preview').show();$('#preview').attr('src',reader.result);});"><%= f.file_field :image %></div>
       <%= f.hidden_field :image_cache %>
     </div>
     <div class="from-group">
       <% if @category.persisted? && @category.image? %>
-      <label>
-        <%= f.check_box :remove_image %>remove
-      </label>
+        <label>
+          <%= f.check_box :remove_image %>remove
+        </label>
       <% end %>
+    </div>
+
+    <div class="form-group">
+      <label class="col-lg-2 control-label">ステータス</label>
+      <div class="col-lg-10">
+        <% Category.statuses.each_key do |s|%>
+          <div class="radio">
+            <label>
+              <% check = (s == "active") ? "checked" : "" %>
+              <%= f.radio_button :status, s, checked: check %><%= I18n.t("category_status.#{s}") %>
+            </label>
+          </div>
+        <% end %>
+      </div>
     </div>
 
     <div class="form-group">

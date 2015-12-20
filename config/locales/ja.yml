@@ -13,6 +13,7 @@ ja:
       truncate: "..."
   category_status:
     active: "アクティブ"
+    archived: "書込み禁止"
     deleted: "削除"
   topic_status:
     active: "アクティブ"
@@ -25,4 +26,4 @@ ja:
     active: "アクティブ"
     locked: "ロック"
     deleted: "削除"
-
+  admin: 管理者

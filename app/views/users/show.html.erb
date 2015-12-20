@@ -7,7 +7,9 @@
       <th>トピック</th>
       <th>詳細</th>
       <th>作成日</th>
+      <th>更新日</th>
       <th>関連カテゴリ</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
@@ -16,10 +18,13 @@
       <td class="long-text"><%= link_to t.title, t %></td>
       <td class="long-text"><%= t.value %></td>
       <td class="long-test"><%= t.created_at %></td>
+      <td class="long-test"><%= t.updated_at %></td>
       <td class="long-test"><%= link_to t.category.title, t.category %></td>
-      <td><%= link_to '編集', edit_topic_path(t) %></td>
+      <td class="col-xs-1"><%= link_to edit_topic_path(t) do %>
+        <span class=" btn btn-success glyphicon glyphicon-edit"></span>
+      <% end %></td>
     </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>
 
@@ -32,26 +37,29 @@
       <th>作成日</th>
       <th>関連トピック</th>
       <th>関連カテゴリ</th>
+      <th></th>
     </tr>
   </thead>
   <tbody>
     <% @comments.each do |c|%>
-    <tr>
-      <td class="long-text"><%= c.value %></td>
-      <td>
-        <% if c.image.url.present? %>
-          <%= link_to c.image.url do %>
-            <%= image_tag c.image.thumb.url %>
+      <tr>
+        <td class="long-text"><%= c.value %></td>
+        <td>
+          <% if c.image.url.present? %>
+            <%= link_to c.image.url do %>
+              <%= image_tag c.image.thumb.url %>
+            <% end %>
+          <% else %>
+            なし
           <% end %>
-        <% else %>
-        なし
-        <% end %>
-      </td>
-      <td class="long-test"><%= c.created_at %></td>
-      <td class="long-test"><%= link_to c.topic.title, c.topic %></td>
-      <td class="long-test"><%= link_to c.topic.category.title, c.topic.category %></td>
-      <td><%= link_to '編集', edit_comment_path(c) %></td>
-    </tr>
+        </td>
+        <td class="long-test"><%= c.created_at %></td>
+        <td class="long-test"><%= link_to c.topic.title, c.topic %></td>
+        <td class="long-test"><%= link_to c.topic.category.title, c.topic.category %></td>
+        <td class="col-xs-1"><%= link_to edit_comment_path(c) do %>
+          <span class=" btn btn-success glyphicon glyphicon-edit"></span>
+        <% end %></td>
+      </tr>
     <% end %>
   </tbody>
 </table>

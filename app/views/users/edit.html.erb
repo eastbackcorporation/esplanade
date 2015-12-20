@@ -21,7 +21,7 @@
         <label>
           <input type="radio" value="option1" checked="">
           <% check = @user.status == s ? "checked" : ""%>
-          <%= f.radio_button :status, s, checked: check %><%= s %>
+          <%= f.radio_button :status, s, checked: check %><%= I18n.t "user_status.#{s}" %>
         </label>
       </div>
     <% end %>
@@ -30,7 +30,7 @@
   <div class="form-group">
     <label>権限</label>
     <div class="checkbox">
-      <label><%= f.check_box :admin %><%= f.label :admin %></label>
+      <label><%= f.check_box :admin %><%= I18n.t "admin" %></label>
     </div>
   </div>
 

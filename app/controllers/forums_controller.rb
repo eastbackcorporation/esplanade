@@ -22,8 +22,12 @@ class ForumsController < ApplicationController
                          .uniq
   end
   def search
-    #@categories = Category.search(title_cont: params["word"][0]).result
-    word = params["word"][0]
+    word =
+      if params["word"]
+        params["word"][0]
+      else
+        ""
+      end
     topic_search={title_or_value_cont: word}
     comment_search={value_cont: word}
     @view_topics = params[:topic]
@@ -36,15 +40,28 @@ class ForumsController < ApplicationController
     topic_search.merge! @date_params
     comment_search.merge! @date_params
     if current_user.try(:admin?) and @view_users
-      p params
-      @topics = Topic.search(topic_search).result.where("status in (?)",@topic_statuses).page params[:page] if @view_topics
-      @comments = Comment.search(comment_search).result.where("status in (?)",@comment_statuses).page params[:page] if @view_comments
+      if @category_id.blank?
+        @category_ids = Category.select(:id).where("status in (?)",@category_statuses)
+      else
+        @category_ids = [@category_id]
+      end
+
+      @topics = Topic.search(topic_search).result.where("status in (?)",@topic_statuses).where("category_id in (?)",@category_ids).page params[:page] if @view_topics
+      @topic_ids = Topic.select(:id).where("category_id in (?)",@category_ids)
+      @comments = Comment.search(comment_search).result.where("status in (?)",@comment_statuses).where("topic_id in (?)",@topic_ids).page params[:page] if @view_comments
+
       user_search={email_or_username_cont: word}
       user_search.merge! @date_params
       @users = User.search(user_search).result.where("status in (?)",@user_statuses).page params[:page]
     else
-      @topics = Topic.search(topic_search).result.page params[:page] if @view_topics
-      @comments = Comment.search(comment_search).result.page params[:page] if @view_comments
+    if @category_id.blank?
+      @category_ids = Category.select(:id).where.not(status: :deleted)
+    else
+      @category_ids = [@category_id]
+    end
+
+      @topics = Topic.search(topic_search).result.where.not(status: Topic.statuses[:deleted]).where("category_id in (?)",@category_ids).page params[:page] if @view_topics
+      @comments = Comment.search(comment_search).result.where.not(status: Comment.statuses[:deleted]).where("topic_id in (?)",@topic_ids).page params[:page] if @view_comments
     end
   end
   def admin
@@ -56,6 +73,7 @@ class ForumsController < ApplicationController
     @topic_statuses = []
     @comment_statuses = []
     @user_statuses = []
+    @category_id = params["category"]["id"]
     if params["category_statuses"]
       params["category_statuses"].each_key do |s|
         @category_statuses << Category.statuses[s]
@@ -76,7 +94,7 @@ class ForumsController < ApplicationController
         @user_statuses << User.statuses[s]
       end
     end
-    if    @category_statuses.blank? and @topic_statuses.blank? and @comment_statuses.blank? and @user_statuses.blank?
+    if @category_statuses.blank? and @topic_statuses.blank? and @comment_statuses.blank? and @user_statuses.blank?
 
       @category_statuses = Category.statuses.values
       @topic_statuses = Topic.statuses.values

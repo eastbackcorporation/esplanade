@@ -55,12 +55,12 @@ class ForumsController < ApplicationController
       @users = User.search(user_search).result.where("status in (?)",@user_statuses).page params[:page]
     else
     if @category_id.blank?
-      @category_ids = Category.select(:id).where.not(status: :deleted)
+      @category_ids = Category.select(:id).where.not(status: Category.statuses[:deleted])
     else
       @category_ids = [@category_id]
     end
-
       @topics = Topic.search(topic_search).result.where.not(status: Topic.statuses[:deleted]).where("category_id in (?)",@category_ids).page params[:page] if @view_topics
+      @topic_ids = Topic.select(:id).where("category_id in (?)",@category_ids)
       @comments = Comment.search(comment_search).result.where.not(status: Comment.statuses[:deleted]).where("topic_id in (?)",@topic_ids).page params[:page] if @view_comments
     end
   end
@@ -73,7 +73,12 @@ class ForumsController < ApplicationController
     @topic_statuses = []
     @comment_statuses = []
     @user_statuses = []
-    @category_id = params["category"]["id"]
+    @category_id = 
+      if params["category"]
+        params["category"]["id"]
+      else
+        ""
+      end
     if params["category_statuses"]
       params["category_statuses"].each_key do |s|
         @category_statuses << Category.statuses[s]
@@ -108,34 +113,34 @@ class ForumsController < ApplicationController
       case params["between"]["datetime"]
       when "appoint"
         year,month,day = params["created_at_gteq"][0].split("/")
-        date_params[:created_at_gteq] = 
+        @date_params[:created_at_gteq] = 
           begin
             Time.new(year,month,day,0,0,0)
           rescue
             Time.new - 100.year
           end
         year,month,day = params["created_at_lteq"][0].split("/")
-        date_params[:created_at_lteq] =
+        @date_params[:created_at_lteq] =
           begin
             Time.new(year,month,day,24,0,0)
           rescue
             Time.new
           end
       when "1hour"
-        date_params[:created_at_gteq] = Time.now - 1.hour
-        date_params[:created_at_lteq] = Time.now
+        @date_params[:created_at_gteq] = Time.now - 1.hour
+        @date_params[:created_at_lteq] = Time.now
       when "24hours"
-        date_params[:created_at_gteq] = Time.now - 1.day
-        date_params[:created_at_lteq] = Time.now
+        @date_params[:created_at_gteq] = Time.now - 1.day
+        @date_params[:created_at_lteq] = Time.now
       when "1week"
-        date_params[:created_at_gteq] = Time.now - 1.week
-        date_params[:created_at_lteq] = Time.now
+        @date_params[:created_at_gteq] = Time.now - 1.week
+        @date_params[:created_at_lteq] = Time.now
       when "1month"
-        date_params[:created_at_gteq] = Time.now - 1.month
-        date_params[:created_at_lteq] = Time.now
+        @date_params[:created_at_gteq] = Time.now - 1.month
+        @date_params[:created_at_lteq] = Time.now
       when "1year"
-        date_params[:created_at_gteq] = Time.now - 1.year
-        date_params[:created_at_lteq] = Time.now
+        @date_params[:created_at_gteq] = Time.now - 1.year
+        @date_params[:created_at_lteq] = Time.now
       end
     end
   end

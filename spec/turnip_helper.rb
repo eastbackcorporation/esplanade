@@ -67,22 +67,30 @@ def create_user(username: USER,
               admin: admin)
 end
 
-def create_category(title: CATEGORY,status: :active,image: nil)
-  Category.create(title: title,status: Category.statuses[status],image: image)
+def create_category(title: CATEGORY,
+                    status: :active,
+                    image: nil,
+                    created_at: Time.now,
+                    updated_at: Time.now)
+  Category.create(title: title,status: Category.statuses[status],image: image, created_at: created_at, updated_at:updated_at)
 end
 
 def create_topic(user: create_user,
                  title: TOPIC,
                  value: "topic value",
                  category: create_category,
-                 status: :active)
-  Topic.create(title: title,value: value,category_id: category.id, user_id: user.id, status: Topic.statuses[status])
+                 status: :active,
+                    created_at: Time.now,
+                    updated_at: Time.now)
+  Topic.create(title: title,value: value,category_id: category.id, user_id: user.id, status: Topic.statuses[status], created_at: created_at, updated_at:updated_at)
 end
 def create_comment(user: create_user,
                    value: COMMENT,
                    topic: create_topic,
-                   status: :active)
-  Comment.create(value: value, topic_id: topic.id, user_id: user.id, status: Comment.statuses[status])
+                   status: :active,
+                    created_at: Time.now,
+                    updated_at: Time.now)
+  Comment.create(value: value, topic_id: topic.id, user_id: user.id, status: Comment.statuses[status], created_at: created_at, updated_at:updated_at)
 end
 # def get_user(username: USER)
 #   User.where(username: username).first

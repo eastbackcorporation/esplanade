@@ -38,10 +38,26 @@
           </label>
         <% end %>
       </div>
+      <% if current_user.try(:admin?) %>
+        <div class="form-group">
+          <label class="col-lg-2 control-label">ステータス</label>
+          <div class="col-lg-10">
+            <% Comment.statuses.each_key do |s|%>
+            <div class="radio">
+              <label>
+                <input type="radio" value="option1" checked="">
+                <% check = @comment.status == s ? "checked" : ""%>
+                <%= f.radio_button :status, s, checked: check %><%= I18n.t("comment_status.#{s}") %>
+              </label>
+            </div>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
 
       <div class="form-group">
         <div class="pull-right">
-          <%= f.submit "投稿", class: "btn btn-primary"%>
+          <%= f.submit class: "btn btn-primary"%>
         </div>
       </div>
     </fieldset>

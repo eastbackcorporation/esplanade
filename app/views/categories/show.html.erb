@@ -3,7 +3,7 @@
 <div  class="container">
   <table class="table table-striped">
     <tbody>
-      <% @category.topics.select{|t| !t.deleted?}.sort{|a,b|b.created_at <=> a.created_at}.each do |t| %>
+      <% @category.topics.select{|t| !t.deleted?}.sort{|a,b|b.updated_at <=> a.updated_at}.each do |t| %>
         <tr>
           <td>
             <div class="col-xs-1">
@@ -28,7 +28,7 @@
                 作成者:<%= t.user.username %>
             </label>
             <label class="long-text" style="font-size: xx-small;">
-              <%= t.comments.count %>件のコメント
+              <%= t.comments.select{|c| !c.deleted?}.count %>件のコメント
             </label>
             <label class="long-text" style="font-size: xx-small;">
               最終更新:<%= twt(t.updated_at) %>

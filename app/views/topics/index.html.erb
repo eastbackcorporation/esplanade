@@ -8,24 +8,20 @@
         <th><%= link_to 'カテゴリー', controller: 'topics', action: 'index', page: 1, order: @order, column: 'categories.title' %></th>
         <th><%= link_to '作成者', controller: 'topics', action: 'index', page: 1, order: @order, column: 'users.username' %></th>
         <th><%= link_to 'ステータス', controller: 'topics', action: 'index', page: 1, order: @order, column: 'status' %><th>
-            <th colspan="2" class="col-xs-2"></th>
+            <th class="col-xs-1"></th>
       </tr>
     </thead>
 
     <tbody>
       <% @topics.each do |topic| %>
         <tr>
-          <td class="long-text"><%= link_to topic.title, topic %></td>
-          <td class="long-text"><%= topic.value %></td>
-          <td class="long-text"><%= topic.category.title %></td>
-          <td class="long-text"><%= topic.user.username %></td>
+          <td class="long-text" title="<%= topic.title %>"><%= link_to topic.title, topic %></td>
+          <td class="long-text" title="<%= topic.value %>"><%= topic.value %></td>
+          <td class="long-text"><%= link_to topic.category.title,topic.category %></td>
+          <td class="long-text"><%= link_to topic.user.username, topic.user %></td>
           <td class="long-text"><%= I18n.t "topic_status.#{topic.status}"%></td>
           <td class="col-xs-1"><%= link_to edit_topic_path(topic) do %>
             <span class=" btn btn-success glyphicon glyphicon-edit"></span>
-          <% end %>
-          </td>
-          <td class="col-xs-1"><%= link_to topic, method: :delete, data: { confirm: '一般ユーザが閲覧できなくなります。よろしいですか？' } do %>
-            <span class="btn btn-danger glyphicon glyphicon-trash"></span>
           <% end %>
           </td>
         </tr>

@@ -5,8 +5,6 @@ class TopicsController < ApplicationController
   before_action :set_topic, only: [:show, :edit, :update, :destroy]
   before_action :not_view_deleted_topic, only: [:show]
 
-  # GET /topics
-  # GET /topics.json
   def index
     @column = params[:column].nil? ? :title : params[:column]
     @order = params[:order] == "asc" ? 'desc': 'asc'
@@ -32,46 +30,36 @@ class TopicsController < ApplicationController
     end
   end
 
-  # GET /topics/new
   def new
     @topic = Topic.new
     @topic.category_id = params[:category_id]
   end
 
-  # GET /topics/1/edit
   def edit
   end
 
-  # POST /topics
-  # POST /topics.json
   def create
     @topic = Topic.new(topic_params)
     @topic.user_id = current_user.id
     respond_to do |format|
       if @topic.save
-        format.html { redirect_to @topic, notice: 'Topic was successfully created.' }
-        format.json { render :show, status: :created, location: @topic }
+        format.html { redirect_to @topic, notice: '新しいトピックを作成しました' }
       else
         format.html { render :new }
-        format.json { render json: @topic.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /topics/1
-  # PATCH/PUT /topics/1.json
   def update
     respond_to do |format|
       if @topic.update(topic_params)
-        format.html { redirect_to topics_path, notice: 'updated.' }
+        format.html { redirect_to topics_path, notice: '更新しました' }
       else
         format.html { render :edit }
       end
     end
   end
 
-  # DELETE /topics/1
-  # DELETE /topics/1.json
   def destroy
     @topic.status = Topic.statuses[:deleted]
     respond_to do |format|

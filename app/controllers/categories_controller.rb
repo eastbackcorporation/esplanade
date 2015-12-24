@@ -2,16 +2,12 @@ class CategoriesController < ApplicationController
   before_action :admin_required, only: [:index,:new,:create,:edit, :update, :destroy]
   before_action :set_category, only: [:show, :edit, :update, :destroy]
 
-  # GET /categories
-  # GET /categories.json
   def index
     @column = params[:column].nil? ? :title : params[:column]
     @order = params[:order] == "asc" ? 'desc': 'asc'
     @categories = Category.all.order("#{@column} #{@order}").page params[:page]
   end
 
-  # GET /categories/1
-  # GET /categories/1.json
   def show
     if @category.deleted?
       msg = "カテゴリが削除されています"
@@ -32,41 +28,31 @@ class CategoriesController < ApplicationController
   def edit
   end
 
-  # POST /categories
-  # POST /categories.json
   def create
     @category = Category.new(category_params)
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to @category, notice: 'Category was successfully created.' }
-        format.json { render :show, status: :created, location: @category }
+        format.html { redirect_to @category, notice: '新しいカテゴリを作成しました' }
       else
         format.html { render :new }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # PATCH/PUT /categories/1
-  # PATCH/PUT /categories/1.json
   def update
     respond_to do |format|
       if @category.update(category_params)
-        format.html { redirect_to @category, notice: 'Category was successfully updated.' }
-        format.json { render :show, status: :ok, location: @category }
+        format.html { redirect_to categories_path, notice: '更新しました' }
       else
         format.html { render :edit }
-        format.json { render json: @category.errors, status: :unprocessable_entity }
       end
     end
   end
 
-  # DELETE /categories/1
-  # DELETE /categories/1.json
   def destroy
     @category.status = Category.statuses[:deleted]
-    if  @category.save
+    if @category.save
       respond_to do |format|
         format.html { redirect_to categories_url, notice: '関連するトピック、コメントは表示されなくなりました。' }
       end

@@ -44,7 +44,7 @@
         <% Category.statuses.each_key do |s|%>
           <div class="radio">
             <label>
-              <% check = (s == "active") ? "checked" : "" %>
+              <% check = @category.status == s ? "checked" : "" %>
               <%= f.radio_button :status, s, checked: check %><%= I18n.t("category_status.#{s}") %>
             </label>
           </div>

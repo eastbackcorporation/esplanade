@@ -12,7 +12,7 @@
         <th><%= link_to 'タイトル', controller: 'categories', action: 'index', page: 1, order: @order, column: 'title' %></th>
         <th class="col-xs-2">画像</th>
         <th class="col-xs-2">ステータス</th>
-        <th colspan="2" class="col-xs-2"></th>
+        <th class="col-xs-1"></th>
       </tr>
     </thead>
 
@@ -32,10 +32,6 @@
           <td><%= I18n.t("category_status.#{category.status}") %></td>
           <td class="col-xs-1"><%= link_to edit_category_path(category) do %>
             <span class=" btn btn-success glyphicon glyphicon-edit"></span>
-          <% end %>
-          </td>
-          <td class="col-xs-1"><%= link_to category, method: :delete, data: { confirm: '関連するトピックも閲覧できなくなります。よろしいですか？' } do %>
-            <span class="btn btn-danger glyphicon glyphicon-trash"></span>
           <% end %>
           </td>
         </tr>

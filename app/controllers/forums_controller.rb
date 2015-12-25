@@ -7,7 +7,7 @@ class ForumsController < ApplicationController
     end
   end
   def home
-    @categories = Category.where.not(status: Category.statuses[:deleted])
+    @categories = Category.where.not(status: Category.statuses[:deleted]).order("created_at asc")
 
     late = Time.now - 3.day
     @created_topics = Topic.where("created_at >= ?", late)

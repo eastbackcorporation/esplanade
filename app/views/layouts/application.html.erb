@@ -1,73 +1,74 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Esplanade</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-  <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
-  <%= csrf_meta_tags %>
-</head>
-<body>
-  <header>
-    <nav>
-    <div class="container">
-      <div class="row">
-        <% if current_user.try(:admin?) %>
-        <div class="input-group pull-left">
-          <button type="button" class="btn btn-xs btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            管理メニュー<span class="caret"></span>
-        </button>
-          <ul class="dropdown-menu">
-            <li><%= link_to 'カテゴリ',categories_path %></li>
-            <li><%= link_to 'トピック',topics_path %></li>
-            <li><%= link_to 'コメント',comments_path %></li>
-            <li role="separator" class="divider"></li>
-          <li><%= link_to 'ユーザ', users_path %></li>
-          </ul>
-        </div>
-        <% end %>
-        <div class="pull-right">
-          <% if user_signed_in? %>
-            <strong><%= link_to current_user.username, edit_user_registration_path %></strong>
-            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-          <% else %>
-            <%= link_to 'サインアップ', new_user_registration_path %>
-            <%= link_to 'ログイン', new_user_session_path %>
-          <% end %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="pull-right">
-          <div class="form-group">
-            <%= form_tag({controller: "/forums", action: "search"},class: "form-inline") do %>
-            <%= text_field :word, value = nil, options = {} %>
-            <%= button_tag(type: "submit", class: "btn btn-primary", name: "commit", value: "search") do %>
-                <span class="glyphicon glyphicon-search"></span>
-              <% end %> 
-            <!-- 詳細 -->
-            <button type="button" class="btn btn-default " data-toggle="modal" data-target=".search-modal">
-              <span class="glyphicon glyphicon-option-vertical"></span>
-            </button>
-          <% end %>
-          <%= render "layouts/search" %>
-          <!--詳細end -->
+  <head>
+    <title>Esplanade</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+    <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1/i18n/jquery.ui.datepicker-ja.min.js"></script>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <div class="container">
+          <div class="row">
+            <% if current_user.try(:admin?) %>
+              <div class="input-group pull-left">
+                <button type="button" class="btn btn-xs btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  管理メニュー<span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                  <li><%= link_to 'カテゴリ',categories_path %></li>
+                  <li><%= link_to 'トピック',topics_path %></li>
+                  <li><%= link_to 'コメント',comments_path %></li>
+                  <li role="separator" class="divider"></li>
+                  <li><%= link_to 'ユーザ', users_path %></li>
+                </ul>
+              </div>
+            <% end %>
+            <div class="pull-right">
+              <% if user_signed_in? %>
+                <strong><%= link_to current_user.username, edit_user_registration_path %></strong>
+                <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+              <% else %>
+                <%= link_to 'サインアップ', new_user_registration_path %>
+                <%= link_to 'ログイン', new_user_session_path %>
+              <% end %>
+            </div>
           </div>
-        </div>
-        <div class="pull-left">
-          <%= breadcrumbs separator: " &rsaquo; " %>
-        </div>
-      </div>
-    </div><!-- container -->
-    </nav>
-  </header>
-  <% if notice %>
-    <div class="alert alert-success" role="alert"><%= notice %></div>
-  <% end %>
-  <% if alert %>
-    <div class="alert alert-danger" role="alert"><%= alert %></div>
-  <% end %>
-<%= yield %>
+          <div class="row">
+            <div class="pull-right">
+              <div class="form-group">
+                <%= form_tag({controller: "/forums", action: "search"},class: "form-inline") do %>
+                  <%= text_field :word, value = nil, options = {} %>
+                  <%= button_tag(type: "submit", class: "btn btn-primary", name: "commit", value: "search") do %>
+                    <span class="glyphicon glyphicon-search"></span>
+                  <% end %> 
+                  <!-- 詳細 -->
+                  <button type="button" class="btn btn-default " data-toggle="modal" data-target=".search-modal">
+                    <span class="glyphicon glyphicon-option-vertical"></span>
+                  </button>
+                <% end %>
+                <%= render "layouts/search" %>
+                <!--詳細end -->
+              </div>
+            </div>
+            <div class="pull-left">
+              <%= breadcrumbs separator: " &rsaquo; " %>
+            </div>
+          </div>
+        </div><!-- container -->
+      </nav>
+    </header>
+    <% if notice %>
+      <div class="alert alert-success" role="alert"><%= notice %></div>
+    <% end %>
+    <% if alert %>
+      <div class="alert alert-danger" role="alert"><%= alert %></div>
+    <% end %>
 
-</body>
+    <%= yield %>
+
+  </body>
 </html>

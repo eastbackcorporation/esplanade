@@ -36,6 +36,13 @@ class CommentsController < ApplicationController
 
   def update
     respond_to do |format|
+      status = comment_params[:status]
+      if status == "deleted" and @comment.active? and @comment.image?
+        @comment.image.logical_delete_all
+      end
+      if status == "active" and @comment.deleted? and @comment.image?
+        @comment.image.logical_restore_all
+      end
       if @comment.update(comment_params)
         format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
       else

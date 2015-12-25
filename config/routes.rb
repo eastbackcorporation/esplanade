@@ -6,7 +6,8 @@ Rails.application.routes.draw do
   resources :categories do
     get 'page/:page', :action => :index, :on => :collection
   end
-  devise_for :users, controllers: { sessions: "devise_ex/sessions" }
+  devise_for :users, controllers: { sessions: "devise_ex/sessions",
+                                    registrations: "devise_ex/registrations" }
 
   resource :forums do
     get 'index'

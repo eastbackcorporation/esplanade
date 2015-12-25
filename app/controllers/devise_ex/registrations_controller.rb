@@ -23,9 +23,12 @@ class DeviseEx::RegistrationsController < Devise::RegistrationsController
   # end
 
   # DELETE /resource
-  # def destroy
-  #   super
-  # end
+  def destroy
+    current_user.update(status: :deleted)
+    sign_out
+    redirect_to home_forums_path, notice:"アカウントは削除されました。"
+    #super
+  end
 
   # GET /resource/cancel
   # Forces the session data which is usually expired after sign

@@ -54,13 +54,13 @@ class ForumsController < ApplicationController
       user_search.merge! @date_params
       @users = User.search(user_search).result.where("status in (?)",@user_statuses).page params[:page]
     else
-    if @category_id.blank?
-      @category_ids = Category.select(:id).where.not(status: Category.statuses[:deleted])
-    else
-      @category_ids = [@category_id]
-    end
+      if @category_id.blank?
+        @category_ids = Category.select(:id).where.not(status: Category.statuses[:deleted])
+      else
+        @category_ids = [@category_id]
+      end
       @topics = Topic.search(topic_search).result.where.not(status: Topic.statuses[:deleted]).where("category_id in (?)",@category_ids).page params[:page] if @view_topics
-      @topic_ids = Topic.select(:id).where("category_id in (?)",@category_ids)
+      @topic_ids = Topic.select(:id).where("category_id in (?)",@category_ids).where.not(status: Topic.statuses[:deleted])
       @comments = Comment.search(comment_search).result.where.not(status: Comment.statuses[:deleted]).where("topic_id in (?)",@topic_ids).page params[:page] if @view_comments
     end
   end

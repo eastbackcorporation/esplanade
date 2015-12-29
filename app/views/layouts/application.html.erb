@@ -9,10 +9,11 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
+    </br>
     <header>
       <nav>
         <div class="container">
-          <div class="row">
+          <div class="row center-block col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <% if current_user.try(:admin?) %>
               <div class="input-group pull-left">
                 <button type="button" class="btn btn-xs btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -37,7 +38,7 @@
               <% end %>
             </div>
           </div>
-          <div class="row">
+          <div class="row center-block col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="pull-right">
               <div class="form-group">
                 <%= form_tag({controller: "/forums", action: "search"},class: "form-inline") do %>
@@ -62,10 +63,14 @@
       </nav>
     </header>
     <% if notice %>
-      <div class="alert alert-success" role="alert"><%= notice %></div>
+      <div class="row">
+        <div class="alert alert-success col-xs-10 col-xs-offset-1 col-sm-10 col-sm-offset-1" role="alert"><%= notice %></div>
+      </div>
     <% end %>
     <% if alert %>
-      <div class="alert alert-danger" role="alert"><%= alert %></div>
+      <div class="row">
+        <div class="alert alert-danger" role="alert"><%= alert %></div>
+      </div>
     <% end %>
 
     <%= yield %>

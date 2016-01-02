@@ -17,3 +17,9 @@
   table-layout: fixed;
   word-wrap: break-word;
 }
+button.gotop{
+  z-index: 9999;
+  position: fixed;
+  right: 5%;
+  bottom: 0;
+}

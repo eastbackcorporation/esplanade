@@ -19,8 +19,40 @@
 //ready =(function(){
 //    $('#datepicker').datepicker({ dateFormat: 'yy/mm/dd' })});
 $(function() {
-    $.datepicker.setDefaults( $.datepicker.regional[ "ja" ] );
-    $(".datepicker").datepicker();
+  $.datepicker.setDefaults( $.datepicker.regional[ "ja" ] );
+  $(".datepicker").datepicker();
 });
 //$(document).ready(ready)
 //$(document).on('page:load', ready)
+
+// go toppage
+$(document).ready(function(){
+  $(".gotop").hide();
+  $(window).on("scroll", function(){
+    if ($(this).scrollTop() > 100){
+      $('.gotop').slideDown("fast");
+    }else{
+      $('.gotop').slideUp("fast");
+    }
+    scrollHeight = $(document).height();
+    scrollPosition = $(window).height() + $(window).scrollTop();
+    footHeight = $("footer").innerHeight();
+    if ( scrollHeight - scrollPosition  <= footHeight ){
+      $(".gotop").css({
+       "position":"absolute",
+       "bottom": footHeight
+      });
+     }else{
+       $(".gotop").css({
+         "position":"fixed",
+         "bottom": "0px"
+       });
+     }
+  });
+  $('.gotop a').click(function (){
+    $('body,html').animate({
+      scrollTop: 0
+     }, 500);
+    return false;
+  });
+});

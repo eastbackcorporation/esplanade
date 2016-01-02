@@ -73,13 +73,15 @@
           <div class="alert alert-danger" role="alert"><%= alert %></div>
         </div>
       <% end %>
-      <button type="button" class="gotop btn btn-default">
-        <a href="#">
-          <font size="7">
-            <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-          </font>
-        </a>
-      </button>
+      <div class="gotop">
+        <button type="button" class="btn btn-default">
+          <a href="#">
+            <font size="7">
+              <span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+            </font>
+          </a>
+        </button>
+      </div>
       <%= yield %>
       <div style="min-height: 100px">
       </div>

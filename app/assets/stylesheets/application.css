@@ -17,9 +17,8 @@
   table-layout: fixed;
   word-wrap: break-word;
 }
-button.gotop{
+.gotop{
   z-index: 9999;
-  position: fixed;
-  right: 5%;
-  bottom: 0;
+  width: 100%;
+  text-align: center;
 }

@@ -1,9 +1,10 @@
 ja:
   helpers:
     submit:
-      create: "投稿"
       update: "更新"
-      submit: "保存"
+      create: "登録"
+      comment:
+        create: "投稿"
   views:
     pagination:
       first: "&laquo;"

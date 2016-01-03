@@ -30,15 +30,23 @@
               </div>
             </div>
             <div class="form-group">
-              <strong>検索範囲</strong>
-              <% select_category = Category.where.not(status: Category.statuses[:deleted]).order(:created_at) %>
-              <%= collection_select :category,:id, select_category, :id, :title, include_blank: '全カテゴリ'  %>
-              <%= check_box_tag "topic", true, checked = true %><label>トピック</label>
-              <%= check_box_tag "comment", true, checked = true %><label>コメント</label>
-
-              <% if current_user.try(:admin?)%>
-                <%= check_box_tag "user", true, checked = true %><label>ユーザ</label>
-              <% end %>
+              <div class="col-xs-12 form-inline">
+                <label class="control-label">検索範囲
+                  <% select_category = Category.where.not(status: Category.statuses[:deleted]).order(:created_at) %>
+                  <%= collection_select :category,:id, select_category, :id, :title, include_blank: '全カテゴリ' %>
+                </label>
+                <label class="checkbox-inline">
+                  <%= check_box_tag "topic", true, checked = true %>トピック
+                </label>
+                <label class="checkbox-inline">
+                  <%= check_box_tag "comment", true, checked = true %>コメント
+                </label>
+                <% if current_user.try(:admin?)%>
+                  <label class="checkbox-inline">
+                    <%= check_box_tag "user", true, checked = true %>ユーザ
+                  </label>
+                <% end %>
+              </div>
             </div>
             <% if current_user.try(:admin?) %>
               <div class="form-group">

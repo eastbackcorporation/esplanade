@@ -19,8 +19,8 @@
           <tr>
             <td class="long-text" title="<%= t.title %>"><%= link_to t.title, t %></td>
             <td class="long-text" title="<%= t.value %>"><%= t.value %></td>
-            <td class="long-test"><%= twt(t.created_at) %></td>
-            <td class="long-test"><%= twt(t.updated_at) %></td>
+            <td class="long-test"><%= t.created_at %></td>
+            <td class="long-test"><%= t.updated_at %></td>
             <td class="long-test"><%= link_to t.category.title, t.category %></td>
             <td class="col-xs-1"><%= link_to edit_topic_path(t) do %>
               <span class=" btn btn-success glyphicon glyphicon-edit"></span>
@@ -55,7 +55,7 @@
                 なし
               <% end %>
             </td>
-            <td class="long-text"><%= twt(c.created_at) %></td>
+            <td class="long-text"><%= c.created_at %></td>
             <td class="long-text"><%= link_to c.topic.title, c.topic %></td>
             <td class="long-text"><%= link_to c.topic.category.title, c.topic.category %></td>
             <td class="col-xs-1"><%= link_to edit_comment_path(c) do %>

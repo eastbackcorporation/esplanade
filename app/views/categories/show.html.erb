@@ -32,7 +32,7 @@
                 <%= t.comments.select{|c| !c.deleted?}.count %>件のコメント
               </label>
               <label class="long-text" style="font-size: xx-small;">
-                最終更新:<%= twt(t.updated_at) %>
+                最終更新:<%= t.updated_at %>
             </label>
               </div>
             </td>

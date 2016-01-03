@@ -29,7 +29,7 @@
         <tbody>
           <% @created_topics.each do |ct| %>
             <tr>
-              <td class="col-sm-5 col-xs-5"><%= ct.created_at.to_s(:date) %></td>
+              <td class="col-sm-5 col-xs-5"><%= ct.created_at %></td>
               <td class="long-text col-sm-7 col-xs-7"><%= link_to ct.title, topic_path(ct) %></td>
             </tr>
           <% end %>
@@ -45,7 +45,7 @@
         <tbody>
           <% @wrote_topics.each do |wt| %>
             <tr>
-              <td class="col-sm-5 col-xs-5"><%= wt.created_at.to_s(:date) %></td>
+              <td class="col-sm-5 col-xs-5"><%= wt.created_at %></td>
               <td class="long-text col-sm-7 col-xs-7"><%= link_to wt.title, topic_path(wt) %></td>
             </tr>
           <% end %>

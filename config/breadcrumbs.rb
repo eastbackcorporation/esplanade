@@ -17,6 +17,11 @@ crumb :new_category do
   parent :index_category
 end
 
+crumb :new_topic do |topic|
+  link "トピック作成", new_topic_path
+  parent :category, topic.category
+end
+
 crumb :index_topic do
   link "トピック一覧", topics_path
   parent :admin_root

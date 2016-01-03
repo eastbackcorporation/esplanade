@@ -37,11 +37,6 @@ crumb :search do
   parent :root
 end
 
-crumb :categories do
-  link "カテゴリ選択", categories_path
-  parent :root
-end
-
 crumb :category do |category|
   link category.title, category
   parent :root

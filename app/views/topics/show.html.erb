@@ -43,8 +43,8 @@
       </div>
       <div class="panel-body">
         <% if comment.image? %>
-          <%= link_to comment.image.url do %>
-            <%= image_tag comment.image.thumb.url, class: "img-responsive center-block"%>
+          <%= link_to comment.image.url, 'data-lightbox' => comment.image.url do %>
+            <%= image_tag comment.image.comment_thumb.url, class: "img-responsive center-block"%>
           <% end %>
         <% end %>
         <%= simple_format(h(comment.value)) %>

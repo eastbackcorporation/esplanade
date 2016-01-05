@@ -1,44 +1,40 @@
 <% breadcrumb :index_category %>
-<div class="container">
-  <table class="table table-striped table-hover">
-    <thead>
-      <tr>
-        <th><%= link_to 'タイトル', controller: 'categories', action: 'index', page: 1, order: @order, column: 'title' %></th>
-        <th class="col-xs-2">画像</th>
-        <th class="col-xs-2">ステータス</th>
-        <th class="col-xs-1"></th>
-      </tr>
-    </thead>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th><%= link_to 'タイトル', controller: 'categories', action: 'index', page: 1, order: @order, column: 'title' %></th>
+      <th class="col-xs-2">画像</th>
+      <th class="col-xs-2">ステータス</th>
+      <th class="col-xs-1"></th>
+    </tr>
+  </thead>
 
-    <tbody>
-      <% @categories.each do |category| %>
-        <tr>
-          <td class="long-text"><%= link_to category.title, category %></td>
-          <td >
-            <% if category.image.present? %>
-              <%= link_to category.image.url do %>
-                <%= image_tag category.image.thumb.url %>
-              <% end %>
-            <% else %>
-              なし
+  <tbody>
+    <% @categories.each do |category| %>
+      <tr>
+        <td class="long-text"><%= link_to category.title, category %></td>
+        <td >
+          <% if category.image.present? %>
+            <%= link_to category.image.url do %>
+              <%= image_tag category.image.thumb.url %>
             <% end %>
-          </td>
-          <td><%= I18n.t("category_status.#{category.status}") %></td>
-          <td class="col-xs-1"><%= link_to edit_category_path(category) do %>
+          <% else %>
+            なし
+          <% end %>
+        </td>
+        <td><%= I18n.t("category_status.#{category.status}") %></td>
+        <td class="col-xs-1"><%= link_to edit_category_path(category) do %>
             <span class=" btn btn-success glyphicon glyphicon-edit"></span>
           <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <div class="row">
-    <div class="pull-right">
-      <%= link_to new_category_path, class: "btn btn-primary" do %>
-        <span class="glyphicon glyphicon-plus"></span>
-      <% end %>
-    </div>
-  </div>
-  <div class="text-center"><%= paginate @categories %></div>
-
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="pull-right">
+  <%= link_to new_category_path, class: "btn btn-primary" do %>
+    <span class="glyphicon glyphicon-plus"></span>
+  <% end %>
 </div>
+<div class="text-center"><%= paginate @categories %></div>
+

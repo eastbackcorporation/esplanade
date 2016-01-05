@@ -1,33 +1,31 @@
 <% breadcrumb :index_comment %>
-<div class="container">
-  <table class="table table-striped table-hover">
-    <thead>
+<table class="table table-striped table-hover">
+  <thead>
+    <tr>
+      <th><%= link_to 'コメント', controller: 'comments', action: 'index', page: 1, order: @order, column: 'value' %></th>
+      <th><%= link_to 'ユーザ', controller: 'comments', action: 'index', page: 1, order: @order, column: 'users.username' %></th>
+      <th><%= link_to '作成日', controller: 'comments', action: 'index', page: 1, order: @order, column: 'created_at' %></th>
+      <th><%= link_to 'ステータス', controller: 'comments', action: 'index', page: 1, order: @order, column: 'status' %></th>
+      <th><%= link_to 'トピック', controller: 'comments', action: 'index', page: 1, order: @order, column: 'topics.title' %></th>
+
+      <th class="col-xs-1"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @comments.each do |comment| %>
       <tr>
-        <th><%= link_to 'コメント', controller: 'comments', action: 'index', page: 1, order: @order, column: 'value' %></th>
-        <th><%= link_to 'ユーザ', controller: 'comments', action: 'index', page: 1, order: @order, column: 'users.username' %></th>
-        <th><%= link_to '作成日', controller: 'comments', action: 'index', page: 1, order: @order, column: 'created_at' %></th>
-        <th><%= link_to 'ステータス', controller: 'comments', action: 'index', page: 1, order: @order, column: 'status' %></th>
-        <th><%= link_to 'トピック', controller: 'comments', action: 'index', page: 1, order: @order, column: 'topics.title' %></th>
-
-        <th class="col-xs-1"></th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <% @comments.each do |comment| %>
-        <tr>
-          <td class="long-text" title="<%= comment.value %>" ><%= comment.value %></td>
-          <td class="long-text"><%= link_to comment.user.username, comment.user %></td>
-          <td class="long-text"><%= comment.created_at.to_s %></td>
-          <td class="long-text"><%= I18n.t("comment_status.#{comment.status}") %></td>
-          <td class="long-text"><%= link_to comment.topic.title, comment.topic %></td>
-          <td class="col-xs-1"><%= link_to edit_comment_path(comment) do %>
+        <td class="long-text" title="<%= comment.value %>" ><%= comment.value %></td>
+        <td class="long-text"><%= link_to comment.user.username, comment.user %></td>
+        <td class="long-text"><%= comment.created_at.to_s %></td>
+        <td class="long-text"><%= I18n.t("comment_status.#{comment.status}") %></td>
+        <td class="long-text"><%= link_to comment.topic.title, comment.topic %></td>
+        <td class="col-xs-1"><%= link_to edit_comment_path(comment) do %>
             <span class=" btn btn-success glyphicon glyphicon-edit"></span>
           <% end %>
-          </td>
-        </tr>
-      <% end %>
-    </tbody>
-  </table>
-  <div class="text-center"><%= paginate @comments %></div>
-</div>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<div class="text-center"><%= paginate @comments %></div>

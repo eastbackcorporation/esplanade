@@ -1,27 +1,25 @@
 <% breadcrumb :root %>
-<div class="container">
-  <div style="display: inline;">
-    <% @categories.each do |category| %>
-      <div class="panel panel-default col-xs-12 col-sm-3 col-md-2">
-        <%= link_to category do %>
-          <div class="panel-body"  style="text-align: center">
-            <% if category.image? %>
-              <%= image_tag category.image.thumb.url, class: "img-responsive center-block", width: "50px", height: "50px"%>
-            <% else %>
-              <%= image_tag "/category-default.png", class: "img-responsive center-block", width: "50px", height: "50px"%>
-            <% end %>
-            <%= category.title %>
-          </div><!-- end panel-body -->
-        <% end %>
-      </div><!-- end panel -->
-    <% end %>
-  </div>
-</div><!-- end container -->
+<div style="display: inline;">
+  <% @categories.each do |category| %>
+    <div class="panel panel-default col-xs-12 col-sm-3 col-md-2">
+      <%= link_to category do %>
+        <div class="panel-body"  style="text-align: center">
+          <% if category.image? %>
+            <%= image_tag category.image.thumb.url, class: "img-responsive center-block", width: "50px", height: "50px"%>
+          <% else %>
+            <%= image_tag "/category-default.png", class: "img-responsive center-block", width: "50px", height: "50px"%>
+          <% end %>
+          <%= category.title %>
+        </div><!-- end panel-body -->
+      <% end %>
+    </div><!-- end panel -->
+  <% end %>
+</div>
 
-<div class="container">
+<div class="row col-xs-12 col-sm-12 col-md-12 col-lg-12">
   <div class="text-center">
     <h3>新着情報</h3>
-    </div>
+  </div>
   <div class="col-sm-4 col-sm-offset-2">
     <div class="text-center"><strong>新規トピック</strong></div>
     <div style="height:200px;overflow:scroll;">
@@ -29,14 +27,14 @@
         <tbody>
           <% @created_topics.each do |ct| %>
             <tr>
-              <td class="col-sm-5 col-xs-5"><%= ct.created_at %></td>
-              <td class="long-text col-sm-7 col-xs-7"><%= link_to ct.title, topic_path(ct) %></td>
+              <td class="col-sm-6 col-xs-5"><%= ct.created_at %></td>
+              <td class="long-text col-sm-6 col-xs-7"><%= link_to ct.title, topic_path(ct) %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
     </div>
-      <br />
+    <br />
   </div><!-- col -->
   <div class="col-sm-4">
     <div class="text-center"><strong>新規コメント</strong></div>
@@ -45,11 +43,12 @@
         <tbody>
           <% @wrote_topics.each do |wt| %>
             <tr>
-              <td class="col-sm-5 col-xs-5"><%= wt.created_at %></td>
-              <td class="long-text col-sm-7 col-xs-7"><%= link_to wt.title, topic_path(wt) %></td>
+              <td class="col-sm-6 col-xs-5"><%= wt.created_at %></td>
+              <td class="long-text col-sm-6 col-xs-7"><%= link_to wt.title, topic_path(wt) %></td>
             </tr>
           <% end %>
         </tbody>
       </table>
     </div><!-- col -->
-  </div><!-- container -->
+  </div>
+</div>

@@ -1,48 +1,46 @@
 <div class="container">
-  <div class="row center-block col-xs-12 col-sm-12 col-md-12 col-lg-12">
-    <%= form_for(@category, class: "form-horizontal") do |f| %>
-      <% if @category.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
+  <%= form_for(@category, class: "form-horizontal") do |f| %>
+    <% if @category.errors.any? %>
+      <div id="error_explanation">
+        <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
 
-          <ul>
-            <% @category.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+        <ul>
+          <% @category.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
 
-      <fieldset>
-        <div class="form-group">
-          <strong>タイトル</strong>
-          <div class="col-lg-10">
+    <fieldset>
+      <div class="form-group">
+        <div class="col-xs-12 col-sm-offset-2 col-sm-10">
+          <label class="col-xs-12 col-sm-2 control-label">タイトル</label>
+          <div class="col-xs-12 col-sm-6">
             <%= f.text_field :title, class: "form-control" %>
           </div>
         </div>
-        <div class="form-group">
-          <% if @category.image? %>
-            <strong>画像</strong>
-            <div class="thumbnail">
-              <%= image_tag @category.image.url %>
-            </div>
-          <% end %><br>
-          <div class="btn btn-default" onclick="document.getElementById('category_image').click()">画像</div>
-          <img src="" id="preview" width="50px" hidden="hidden">
-          <div hidden="hidden" onchange="$('#preview').hide();reader=new FileReader();file=document.getElementById('category_image');f=file.files;reader.readAsDataURL(f[0]);reader.onload =(function(){$('#preview').show();$('#preview').attr('src',reader.result);});"><%= f.file_field :image %></div>
-          <%= f.hidden_field :image_cache %>
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12 col-sm-offset-2 col-sm-10">
+          <label class="control-label col-xs-12 col-sm-2">画像</label>
+          <div class="col-xs-12 col-sm-6">
+            <div class="btn" onclick="document.getElementById('category_image').click()">
+              <img src="<%= @category.image.url %>" id="preview" width="50px">
+            </div> <div hidden="hidden" onchange="$('#preview').hide();reader=new FileReader();file=document.getElementById('category_image');f=file.files;reader.readAsDataURL(f[0]);reader.onload =(function(){$('#preview').show();$('#preview').attr('src',reader.result);});"><%= f.file_field :image %></div>
+            <% if @category.image? %>
+              <label>
+                <%= f.check_box :remove_image %>画像削除
+              </label>
+            <% end %>
+            <%= f.hidden_field :image_cache %>
+          </div>
         </div>
-        <div class="from-group">
-          <% if @category.persisted? && @category.image? %>
-            <label>
-              <%= f.check_box :remove_image %>画像削除
-            </label>
-          <% end %>
-        </div>
-
-        <div class="form-group">
-          <label class="col-lg-2 control-label">ステータス</label>
-          <div class="col-lg-10">
+      </div>
+      <div class="form-group">
+        <div class="col-xs-12 col-sm-offset-2 col-sm-10">
+          <label class="control-label col-xs-12 col-sm-2">ステータス</label>
+          <div class="col-xs-12 col-sm-6">
             <% Category.statuses.each_key do |s|%>
               <div class="radio">
                 <label>
@@ -53,14 +51,15 @@
             <% end %>
           </div>
         </div>
+      </div>
 
-        <div class="form-group">
+      <div class="form-group">
+        <div class="row col-xs-12 col-sm-offset-2 col-sm-8">
           <div class="pull-right">
-            <input type="button" class="btn btn-default" value="キャンセル" onclick="history.back()">
             <%= f.submit class: "btn btn-primary"%>
           </div>
         </div>
-      </fieldset>
-    <% end %>
-  </div>
+      </div>
+    </fieldset>
+  <% end %>
 </div>

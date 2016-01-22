@@ -1,5 +1,5 @@
 # coding: utf-8
-class UsersController < ApplicationController
+class Admin::UsersController < ApplicationController
   before_action :admin_required
   before_action :set_user, only: [:show, :edit, :update]
   def index

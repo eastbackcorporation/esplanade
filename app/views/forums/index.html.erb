@@ -1,9 +1,9 @@
-<% breadcrumb :admin_root, %>
+<% breadcrumb :admin_root %>
 <div class="container">
   <ul>
-    <li><%= link_to 'カテゴリ', controller: :categories, action: :index %></li>
-    <li><%= link_to 'トピック', controller: :topics, action: :index %></li>
-    <li><%= link_to 'コメント', controller: :comments, action: :index %></li>
-    <li><%= link_to 'ユーザ', controller: :users, action: :index %></li>
+    <li><%= link_to 'カテゴリ', admin_categories_path %></li>
+    <li><%= link_to 'トピック', admin_topics_path %></li>
+    <li><%= link_to 'コメント', admin_comments_path %></li>
+    <li><%= link_to 'ユーザ', admin_users_path %></li>
   </ul>
 </div>

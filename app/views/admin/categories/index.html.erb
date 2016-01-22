@@ -24,7 +24,7 @@
         </td>
         <td><%= I18n.t("category_status.#{category.status}") %></td>
         <td class="col-xs-1">
-          <%= link_to edit_category_path(category) do %>
+          <%= link_to edit_admin_category_path(category) do %>
             <span class=" btn btn-success glyphicon glyphicon-edit"></span>
           <% end %>
         </td>
@@ -33,7 +33,7 @@
   </tbody>
 </table>
 <div class="pull-right">
-  <%= link_to new_category_path, class: "btn btn-primary" do %>
+  <%= link_to new_admin_category_path, class: "btn btn-primary" do %>
     <span class="glyphicon glyphicon-plus"></span>
   <% end %>
 </div>

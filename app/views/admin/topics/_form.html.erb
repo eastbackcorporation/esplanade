@@ -1,0 +1,48 @@
+<div class="container">
+    <%= f.hidden_field :category_id %>
+    <%= f.hidden_field :user_id %>
+    <form class="form-horizontal">
+      <fieldset>
+        <div class="form-group">
+          <div class="col-xs-12 col-sm-offset-2 col-sm-10">
+            <label class="col-xs-12 col-sm-2 control-label">タイトル</label>
+            <div class="col-xs-12 col-sm-6">
+              <%= f.text_field :title, class: "form-control",  placeholder: "・・・について" %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-12 col-sm-offset-2 col-sm-10">
+            <label class="col-xs-12 col-sm-2 control-label">詳細</label>
+            <div class="col-xs-12 col-sm-6 ">
+              <%= f.text_area :value, class: "form-control", rows: "3" %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-xs-12 col-sm-offset-2 col-sm-10">
+            <label class="col-xs-12 col-sm-2 control-label">ステータス</label>
+            <div class="col-xs-12 col-sm-6">
+              <% Topic.statuses.each_key do |s|%>
+                <div class="radio">
+                  <label>
+                    <input type="radio" value="option1" checked="">
+                    <% check = @topic.status == s ? "checked" : ""%>
+                    <%= f.radio_button :status, s, checked: check %><%= I18n.t("topic_status.#{s}") %>
+                  </label>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="row col-xs-12 col-sm-offset-2 col-sm-8">
+            <div class="pull-right">
+              <%= f.submit class: "btn btn-primary" %>
+            </div>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+  <% end %>
+</div>

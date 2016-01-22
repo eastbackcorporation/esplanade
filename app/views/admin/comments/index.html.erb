@@ -16,11 +16,11 @@
     <% @comments.each do |comment| %>
       <tr>
         <td class="long-text" title="<%= comment.value %>" ><%= comment.value %></td>
-        <td class="long-text"><%= link_to comment.user.username, comment.user %></td>
+        <td class="long-text"><%= link_to comment.user.username, admin_user_path(comment.user) %></td>
         <td class="long-text"><%= comment.created_at.to_s %></td>
         <td class="long-text"><%= I18n.t("comment_status.#{comment.status}") %></td>
-        <td class="long-text"><%= link_to comment.topic.title, comment.topic %></td>
-        <td class="col-xs-1"><%= link_to edit_comment_path(comment) do %>
+        <td class="long-text"><%= link_to comment.topic.title, admin_topic_path(comment.topic) %></td>
+        <td class="col-xs-1"><%= link_to edit_admin_comment_path(comment) do %>
             <span class=" btn btn-success glyphicon glyphicon-edit"></span>
           <% end %>
         </td>

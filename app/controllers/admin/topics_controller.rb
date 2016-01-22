@@ -1,8 +1,15 @@
 # coding: utf-8
-class TopicsController < ApplicationController
+class Admin::TopicsController < ApplicationController
   before_action :sign_in_required, only: [:new, :create]
-  before_action :set_topic, only: [:show]
+  before_action :admin_required, only: [:index, :edit, :update, :destory]
+  before_action :set_topic, only: [:show, :edit, :update, :destroy]
   before_action :not_view_deleted_topic, only: [:show]
+
+  def index
+    @column = params[:column].nil? ? :title : params[:column]
+    @order = params[:order] == "asc" ? 'desc': 'asc'
+    @topics = Topic.joins(:category,:user).all.order("#{@column} #{@order}").page params[:page]
+  end
 
   def show
     if @topic.deleted? or @topic.category.deleted?
@@ -28,6 +35,9 @@ class TopicsController < ApplicationController
     @topic.category_id = params[:category_id]
   end
 
+  def edit
+  end
+
   def create
     @topic = Topic.new(topic_params)
     @topic.user_id = current_user.id
@@ -40,11 +50,32 @@ class TopicsController < ApplicationController
     end
   end
 
+  def update
+    respond_to do |format|
+      if @topic.update(topic_params)
+        format.html { redirect_to topics_path, notice: '更新しました' }
+      else
+        format.html { render :edit }
+      end
+    end
+  end
+
+  def destroy
+    @topic.status = Topic.statuses[:deleted]
+    respond_to do |format|
+      if @topic.save
+        format.html { redirect_to topics_url, notice: "#{@topic.title}は一般ユーザが閲覧できなくなりました" }
+      end
+    end
+  end
+
   private
+  # Use callbacks to share common setup or constraints between actions.
   def set_topic
     @topic = Topic.find(params[:id])
   end
 
+  # Never trust parameters from the scary internet, only allow the white list through.
   def topic_params
     params.require(:topic).permit(:title, :value, :category_id, :status)
   end

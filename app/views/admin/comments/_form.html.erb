@@ -25,6 +25,20 @@
           </label>
         <% end %>
       </div>
+      <div class="form-group">
+        <label class="col-lg-2 control-label">ステータス</label>
+        <div class="col-lg-10">
+          <% Comment.statuses.each_key do |s|%>
+            <div class="radio">
+              <label>
+                <input type="radio" value="option1" checked="">
+                <% check = @comment.status == s ? "checked" : ""%>
+                <%= f.radio_button :status, s, checked: check %><%= I18n.t("comment_status.#{s}") %>
+              </label>
+            </div>
+          <% end %>
+        </div>
+      </div>
 
       <div class="form-group">
         <div class="pull-right">

@@ -1,25 +1,23 @@
 <% breadcrumb :search %>
 
-<div class="container">
-  <% if @view_topics %>
+<% if @view_topics %>
   <strong>トピック</strong>
-  <div  class="container">
-    <% if @topics.blank? %>
-      <strong>該当なし</strong>
-    <% end %>
-    <table class="table table-striped">
-      <tbody>
-        <% @topics.each do |t| %>
+  <% if @topics.blank? %>
+    <strong>該当なし</strong>
+  <% end %>
+  <table class="table table-striped">
+    <tbody>
+      <% @topics.each do |t| %>
         <tr>
           <td>
             <%= link_to t do %>
-            <div>
-              <strong><%= t.title %></strong>
-            </div>
-            <div>
-              <label class="long-text"><%= t.value %></label>
-            </div>
-          <% end %>
+              <div>
+                <strong><%= t.title %></strong>
+              </div>
+              <div>
+                <label class="long-text"><%= t.value %></label>
+              </div>
+            <% end %>
           </td>
           <% if current_user.try(:admin?) %>
             <td class="col-xs-1">
@@ -30,28 +28,26 @@
           <% end %>
         </tr>
       <% end %>
-      </tbody>
-    </table>
-    <div class="text-center"><%= paginate @topics %></div>
-  </div>
+    </tbody>
+  </table>
+  <div class="text-center"><%= paginate @topics %></div>
 <% end %>
 <% if @view_comments %>
   <strong>コメント</strong>
-  <div  class="container">
-    <% if @comments.blank? %>
-      <strong>該当なし</strong>
-    <% end %>
-    <table class="table table-striped">
-      <tbody>
-        <% @comments.each do |c| %>
-          <tr>
-            <td>
-              <%= link_to c.topic do %>
-                <div>
-                  <label class="long-text"><%= c.value %></label>
-                </div>
-              <% end %>
-            </td>
+  <% if @comments.blank? %>
+    <strong>該当なし</strong>
+  <% end %>
+  <table class="table table-striped">
+    <tbody>
+      <% @comments.each do |c| %>
+        <tr>
+          <td>
+            <%= link_to c.topic do %>
+              <div>
+                <label class="long-text"><%= c.value %></label>
+              </div>
+            <% end %>
+          </td>
           <% if current_user.try(:admin?) %>
             <td class="col-xs-1">
               <%= link_to edit_comment_path(c) do %>
@@ -59,10 +55,10 @@
               <% end %>
             </td>
           <% end %>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
   </div>
   <div class="text-center"><%= paginate @comments %></div>
 <% end %>
@@ -91,18 +87,16 @@
                 </div>
               <% end %>
             </td>
-          <% if current_user.try(:admin?) %>
-            <td class="col-xs-1">
-              <%= link_to edit_admin_user_path(u) do %>
-                <span class=" btn btn-success glyphicon glyphicon-edit"></span>
-              <% end %>
-            </td>
-          <% end %>
+            <% if current_user.try(:admin?) %>
+              <td class="col-xs-1">
+                <%= link_to edit_admin_user_path(u) do %>
+                  <span class=" btn btn-success glyphicon glyphicon-edit"></span>
+                <% end %>
+              </td>
+            <% end %>
           </tr>
         <% end %>
       </tbody>
     </table>
-  </div>
-  <div class="text-center"><%= paginate @users %></div>
-<% end %>
-</div>
+    <div class="text-center"><%= paginate @users %></div>
+  <% end %>

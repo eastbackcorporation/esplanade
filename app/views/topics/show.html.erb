@@ -1,19 +1,25 @@
 <% breadcrumb :topic, @topic %>
 <div class="center-block panel panel-primary">
   <div class="panel-heading">
-    <h3 class="panel-title">
-      <strong><%= @topic.title %></strong><br />
-      <small>
-        <% if @topic.user.image? %>
-          <%= image_tag @topic.user.image.thumb.url, class: "img-circle", style: "height: 30px;width: 30px;" %>
-        <% else %>
-          <%= image_tag "/avatar-default.png", class: "img-circle", style: "height: 30px;width: 30px;" %>
-        <% end %>
-        投稿者：<%= @topic.user.username %>
-      &nbsp;&nbsp;
-      <%= @topic.created_at %>
-      </small>
-    </h3>
+    <div style="display: inline-block;vertical-align: top;">
+      <% if @topic.user.image? %>
+        <%= image_tag @topic.user.image.thumb.url, class: "img-circle", style: "height: 30px;width: 30px;" %>
+      <% else %>
+        <%= image_tag "/avatar-default.png", class: "img-circle", style: "height: 30px;width: 30px;" %>
+      <% end %>
+    </div>
+    <div style="display: inline-block">
+      <div>
+        <h3 class="panel-title"><strong><%= @topic.title %></strong></h3>
+      </div>
+      <div>
+        <small>
+          投稿者：<%= @topic.user.username %>
+        &nbsp;&nbsp;
+        <%= @topic.created_at %>
+        </small>
+      </div>
+    </div>
   </div>
   <div class="panel-body">
     <%= simple_format(h(@topic.value)) %>

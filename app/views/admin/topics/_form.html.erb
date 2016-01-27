@@ -1,4 +1,5 @@
 <div class="container">
+  <%= form_for([:admin,@topic]) do |f| %>
     <%= f.hidden_field :category_id %>
     <%= f.hidden_field :user_id %>
     <form class="form-horizontal">

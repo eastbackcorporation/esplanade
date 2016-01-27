@@ -32,7 +32,7 @@ class Admin::CategoriesController < Admin::AdminController
 
     respond_to do |format|
       if @category.save
-        format.html { redirect_to @category, notice: '新しいカテゴリを作成しました' }
+        format.html { redirect_to admin_categories_path, notice: '新しいカテゴリを作成しました' }
       else
         format.html { render :new }
       end
@@ -42,7 +42,7 @@ class Admin::CategoriesController < Admin::AdminController
   def update
     respond_to do |format|
       if @category.update(category_params)
-        format.html { redirect_to categories_path, notice: '更新しました' }
+        format.html { redirect_to admin_categories_path, notice: '更新しました' }
       else
         format.html { render :edit }
       end

@@ -15,8 +15,8 @@
         <td class="long-text"><%= link_to category.title, category %></td>
         <td >
           <% if category.image.present? %>
-            <%= link_to category.image.url do %>
-              <%= image_tag category.image.thumb.url %>
+            <%= link_to category.image.url, 'data-lightbox' => category.image.url do %>
+              <%= image_tag category.image.thumb.url,class: "img-responsive center-block" %>
             <% end %>
           <% else %>
             なし

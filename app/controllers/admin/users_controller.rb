@@ -25,7 +25,7 @@ class Admin::UsersController < ApplicationController
     @user.admin = user_params[:admin]
     respond_to do |format|
       if @user.save
-        format.html { redirect_to @user, notice: 'ユーザ情報を変更しました。' }
+        format.html { redirect_to admin_users_path, notice: 'ユーザ情報を変更しました。' }
       else
         format.html { render :edit, notice: '変更できませんでした'}
       end
@@ -33,7 +33,6 @@ class Admin::UsersController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_user
       @user = User.find(params[:id])
     end

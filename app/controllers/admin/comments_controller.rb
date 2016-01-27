@@ -21,7 +21,7 @@ class Admin::CommentsController < Admin::AdminController
         @comment.image.logical_restore_all
       end
       if @comment.update(comment_params)
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
+        format.html { redirect_to admin_comments_path, notice: '更新しました' }
       else
         format.html { render :edit }
       end

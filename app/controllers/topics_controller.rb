@@ -46,7 +46,7 @@ class TopicsController < ApplicationController
   end
 
   def topic_params
-    params.require(:topic).permit(:title, :value, :category_id, :status)
+    params.require(:topic).permit(:title, :value, :category_id, :status, :bootsy_image_gallery_id)
   end
 
   def not_view_deleted_topic

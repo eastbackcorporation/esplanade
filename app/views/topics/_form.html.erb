@@ -1,31 +1,16 @@
-<div class="container">
-  <%= form_for(@topic) do |f| %>
-    <%= f.hidden_field :category_id %>
-    <%= f.hidden_field :user_id %>
-    <form class="form-horizontal">
+<%= form_for(@topic) do |f| %>
+  <%= f.hidden_field :category_id %>
+  <%= f.hidden_field :user_id %>
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <%= f.text_field :title, class: "form-control", placeholder: "タイトル" %></div>
+    <div class="panel-body">
+      <%= f.bootsy_area :value, class: "form-control", rows: "10", placeholder: "詳細" %>
       <div class="form-group">
-        <div class="col-xs-12 col-sm-offset-2 col-sm-10">
-          <label class="col-xs-12 col-sm-2 control-label">タイトル</label>
-          <div class="col-xs-12 col-sm-6">
-            <%= f.text_field :title, class: "form-control",  placeholder: "・・・について" %>
-          </div>
+        <div class="pull-right">
+          <%= f.submit class: "btn btn-primary" %>
         </div>
       </div>
-      <div class="form-group">
-        <div class="col-xs-12 col-sm-offset-2 col-sm-10">
-          <label class="col-xs-12 col-sm-2 control-label">詳細</label>
-          <div class="col-xs-12 col-sm-6 ">
-            <%= f.text_area :value, class: "form-control", rows: "3" %>
-          </div>
-        </div>
-      </div>
-      <div class="form-group">
-        <div class="row col-xs-12 col-sm-offset-2 col-sm-8">
-          <div class="pull-right">
-            <%= f.submit class: "btn btn-primary" %>
-          </div>
-        </div>
-      </div>
-    </form>
-  <% end %>
-</div>
+    </div>
+  </div>
+<% end %>

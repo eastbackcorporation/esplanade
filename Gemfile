@@ -18,6 +18,9 @@ gem 'ransack'
 # Paginator
 gem 'kaminari'
 
+# wysiwyg editor
+gem 'bootsy'
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.5'
 # Use postgresql as the database for Active Record

@@ -22,7 +22,8 @@
     </div>
   </div>
   <div class="panel-body">
-    <%= simple_format(h(@topic.value)) %>
+    <% t = add_lightbox(@topic.value) %>
+    <%= t.html_safe %>
   </div>
 </div>
 
@@ -46,12 +47,8 @@
     </h3>
   </div>
   <div class="panel-body">
-    <% if comment.image? %>
-      <%= link_to comment.image.url, 'data-lightbox' => comment.image.url do %>
-        <%= image_tag comment.image.comment_thumb.url, class: "img-responsive center-block"%>
-      <% end %>
-    <% end %>
-    <%= simple_format(h(comment.value)) %>
+    <% c = add_lightbox(comment.value) %>
+    <%= c.html_safe %>
   </div>
 </div>
   <% end %>

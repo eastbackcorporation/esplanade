@@ -27,3 +27,6 @@ ja:
     locked: "ロック"
     deleted: "削除"
   admin: 管理者
+  errors:
+    messages:
+      blank: "入力されていません。"

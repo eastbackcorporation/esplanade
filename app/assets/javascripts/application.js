@@ -14,6 +14,8 @@
 //= require jquery_ujs
 //= require jquery-ui
 //= require bootstrap
+//= require bootsy
+//= require bootsy/ja
 //= require turbolinks
 
 //ready =(function(){

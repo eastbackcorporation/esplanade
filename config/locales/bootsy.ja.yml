@@ -1,0 +1,30 @@
+ja:
+  bootsy:
+    action:
+      refresh: 更新
+      destroy: 削除
+      close: 閉じる
+      load: ロード
+      or: '' 
+      upload: ローカルファイル
+      submit_upload: 選択
+      enter_image_url: URL
+    image_gallery: 画像
+    image:
+      s: 画像
+      p: 画像
+      size: 画像サイズ
+      large: 大
+      medium: 中
+      small: 小
+      original: オリジナル
+      new: 新規
+      confirm:
+        destroy: 画像を削除しますか?
+      position:
+        left: 左寄せ
+        right: 右寄せ
+        inline: インライン
+    no_images_uploaded: アップロードされている画像はありません
+    js:
+      alert_unsaved: 保存されていません

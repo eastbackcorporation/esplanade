@@ -15,7 +15,7 @@
     <% @topics.each do |topic| %>
       <tr>
         <td class="long-text" title="<%= topic.title %>"><%= link_to topic.title, topic %></td>
-        <td class="long-text" title="<%= topic.value %>"><%= topic.value %></td>
+        <td class="long-text" title="<%= strip_tags(topic.value) %>"><%= strip_tags(topic.value) %></td>
         <td class="long-text"><%= link_to topic.category.title,topic.category %></td>
         <td class="long-text"><%= link_to topic.user.username, admin_user_path(topic.user) %></td>
         <td class="long-text"><%= I18n.t "topic_status.#{topic.status}"%></td>

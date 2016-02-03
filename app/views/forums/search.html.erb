@@ -15,7 +15,7 @@
                 <strong><%= t.title %></strong>
               </div>
               <div>
-                <label class="long-text"><%= t.value %></label>
+                <label class="long-text"><%= strip_tags(t.value) %></label>
               </div>
             <% end %>
           </td>
@@ -44,7 +44,7 @@
           <td>
             <%= link_to c.topic do %>
               <div>
-                <label class="long-text"><%= c.value %></label>
+                <label class="long-text"><%= strip_tags(c.value) %></label>
               </div>
             <% end %>
           </td>

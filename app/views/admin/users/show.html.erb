@@ -18,7 +18,7 @@
         <% @topics.each do |t|%>
           <tr>
             <td class="long-text" title="<%= t.title %>"><%= link_to t.title, t %></td>
-            <td class="long-text" title="<%= t.value %>"><%= t.value %></td>
+            <td class="long-text" title="<%= strip_tags(t.value) %>"><%= strip_tags(t.value) %></td>
             <td class="long-test"><%= t.created_at %></td>
             <td class="long-test"><%= t.updated_at %></td>
             <td class="long-test"><%= link_to t.category.title, t.category %></td>
@@ -35,7 +35,6 @@
       <thead>
         <tr>
           <th>コメント</th>
-          <th>画像</th>
           <th>作成日</th>
           <th>関連トピック</th>
           <th>関連カテゴリ</th>
@@ -45,16 +44,7 @@
       <tbody>
         <% @comments.each do |c|%>
           <tr>
-            <td class="long-text" title="<%= c.value %>"><%= c.value %></td>
-            <td>
-              <% if c.image.url.present? %>
-                <%= link_to c.image.url do %>
-                  <%= image_tag c.image.thumb.url %>
-                <% end %>
-              <% else %>
-                なし
-              <% end %>
-            </td>
+            <td class="long-text" title="<%= strip_tags(c.value) %>"><%= strip_tags(c.value) %></td>
             <td class="long-text"><%= c.created_at %></td>
             <td class="long-text"><%= link_to c.topic.title, c.topic %></td>
             <td class="long-text"><%= link_to c.topic.category.title, c.topic.category %></td>

@@ -15,7 +15,7 @@
   <tbody>
     <% @comments.each do |comment| %>
       <tr>
-        <td class="long-text" title="<%= comment.value %>" ><%= comment.value %></td>
+        <td class="long-text" title="<%= strip_tags(comment.value) %>" ><%= strip_tags(comment.value) %></td>
         <td class="long-text"><%= link_to comment.user.username, admin_user_path(comment.user) %></td>
         <td class="long-text"><%= comment.created_at.to_s %></td>
         <td class="long-text"><%= I18n.t("comment_status.#{comment.status}") %></td>

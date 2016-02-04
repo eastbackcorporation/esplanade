@@ -64,7 +64,6 @@ group :development, :test do
   gem 'capybara'
   gem 'capybara-webkit'
   gem 'poltergeist'
-  gem 'turnip'
   gem 'selenium-webdriver'
   gem 'database_cleaner'
 end

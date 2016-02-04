@@ -68,7 +68,11 @@
         <% end %>
         <% if alert %>
           <div class="alert alert-danger" role="alert">
-            <%= alert %>
+            <ul>
+              <% alert.each do |a| %>
+                <li><%= a.sub(' ',':') %></li>
+              <% end %>
+            </ul>
           </div>
         <% end %>
       </div>

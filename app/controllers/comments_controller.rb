@@ -14,13 +14,13 @@ class CommentsController < ApplicationController
       if @comment.save
         format.html { redirect_to @comment.topic, notice: "コメントを作成しました" }
       else
-        format.html { render :new }
+        format.html { redirect_to @comment.topic, alert: @comment.errors.full_messages }
       end
     end
   end
 
   private
   def comment_params
-    params.require(:comment).permit(:value, :topic_id, :image, :image_cache, :remove_image, :status, :bootsy_image_gallery_id)
+    params.require(:comment).permit(:value, :topic_id, :status, :bootsy_image_gallery_id)
   end
 end

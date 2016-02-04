@@ -13,6 +13,7 @@ class Admin::CommentsController < Admin::AdminController
 
   def update
     respond_to do |format|
+=begin
       status = comment_params[:status]
       if status == "deleted" and @comment.active? and @comment.image?
         @comment.image.logical_delete_all
@@ -20,9 +21,11 @@ class Admin::CommentsController < Admin::AdminController
       if status == "active" and @comment.deleted? and @comment.image?
         @comment.image.logical_restore_all
       end
+=end
       if @comment.update(comment_params)
         format.html { redirect_to admin_comments_path, notice: '更新しました' }
       else
+        flash.now[:alert] = @comment.errors.full_messages
         format.html { render :edit }
       end
     end
@@ -43,6 +46,6 @@ class Admin::CommentsController < Admin::AdminController
   end
 
   def comment_params
-    params.require(:comment).permit(:value, :topic_id, :image, :image_cache, :remove_image, :status)
+    params.require(:comment).permit(:value, :topic_id, :status)
   end
 end

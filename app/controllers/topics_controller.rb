@@ -35,7 +35,8 @@ class TopicsController < ApplicationController
       if @topic.save
         format.html { redirect_to @topic, notice: '新しいトピックを作成しました' }
       else
-        format.html { render :new }
+        flash.now[:alert] = @topic.errors.full_messages
+        format.html { render :new}
       end
     end
   end

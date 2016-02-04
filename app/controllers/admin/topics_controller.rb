@@ -55,6 +55,7 @@ class Admin::TopicsController < ApplicationController
       if @topic.update(topic_params)
         format.html { redirect_to admin_topics_path, notice: '更新しました' }
       else
+        flash.now[:alert] = @topic.errors.full_messages
         format.html { render :edit }
       end
     end

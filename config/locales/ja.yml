@@ -30,3 +30,10 @@ ja:
   errors:
     messages:
       blank: "入力されていません。"
+  activerecord:
+    attributes:
+      topic:
+        title: タイトル
+        value: 詳細
+      comment:
+        value: コメント
